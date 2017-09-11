@@ -3,7 +3,7 @@
 var gulp = require('gulp'),
   sass = require('gulp-sass'),
   browserSync = require('browser-sync').create(),
-  autoprefixer = require('autoprefixer');
+  autoprefixer = require('gulp-autoprefixer');
 
 var autoprefixerOptions = {
   browsers: ['last 2 versions'],
