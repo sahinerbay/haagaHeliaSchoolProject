@@ -1,8 +1,21 @@
 .lab-assignments {
     position: fixed;
-    left: 0;
-    top: 0;
     bottom: 0;
-    width: 50%;
+    right: 0;
+    width: 100%;
+    height: 50%;
     background-color: $primary-color;
+    &__title {
+        @include assignmentTitle($secondary-color)
+    }
+    @include atSmall {
+        &__small {
+            width: 50%;
+            height: 100%;
+            top: 0;
+            bottom: 0;
+            right: 0;
+         
+        }
+    }
 }

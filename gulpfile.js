@@ -32,15 +32,16 @@ gulp.task('sass', function () {
 });
 
 gulp.task("babel", function () {
-  return gulp.src("./script/index.js")
+  return gulp.src("./scriptES6/index.js")
     .pipe(babel({
       presets: ['env']
     }))
+    .pipe(gulp.dest("./script/"))
     .pipe(uglify())
     .pipe(rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest("./scriptES5/"));
+    .pipe(gulp.dest("./script/"));
 });
 
 gulp.task('sass:watch', function () {
@@ -52,7 +53,7 @@ gulp.task('sass:watch', function () {
   });
 
   gulp.watch('./sass/**/*.scss', ['sass']);
-  gulp.watch('./script/index.js', ['babel']);
+  gulp.watch('./scriptES6/index.js', ['babel']);
   gulp.watch("*.html").on('change', browserSync.reload);
   gulp.watch("./sass/**/*.scss").on('change', browserSync.reload);
 

@@ -1,17 +1,27 @@
 @mixin atSmall {
-  @media (min-width: 530px) {
-    @content;
-  }
+    @media (min-width: 530px) {
+        @content;
+    }
 }
 
 @mixin atMedium {
-  @media (min-width: 800px) {
-    @content;
-  }
+    @media (min-width: 800px) {
+        @content;
+    }
 }
 
 @mixin atLarge {
-  @media (min-width: 1200px) {
-    @content;
-  }
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin assignmentTitle($color) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: $color;
+    text-align: center;
 }
