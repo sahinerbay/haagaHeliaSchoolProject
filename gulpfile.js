@@ -6,6 +6,7 @@ const gulp = require('gulp'),
   babel = require("gulp-babel"),
   uglify = require('gulp-uglify'),
   cleanCSS = require('gulp-clean-css'),
+  rename = require("gulp-rename"),
   autoprefixer = require('gulp-autoprefixer');
 
 const autoprefixerOptions = {
@@ -14,12 +15,20 @@ const autoprefixerOptions = {
 };
 
 gulp.task('sass', function () {
-  return gulp.src('./sass/**/*.scss')
+  return gulp.src('./sass/main.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer(autoprefixerOptions))
-    .pipe(gulp.dest('./css'))
-    .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(browserSync.reload({ stream: true }));
+    .pipe(gulp.dest('./style/'))
+    .pipe(cleanCSS({
+      compatibility: 'ie8'
+    }))
+    .pipe(rename({
+      suffix: '.min'
+    }))
+    .pipe(gulp.dest('./style/'))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 });
 
 gulp.task("babel", function () {
@@ -28,6 +37,9 @@ gulp.task("babel", function () {
       presets: ['env']
     }))
     .pipe(uglify())
+    .pipe(rename({
+      suffix: '.min'
+    }))
     .pipe(gulp.dest("./scriptES5/"));
 });
 
@@ -42,5 +54,6 @@ gulp.task('sass:watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
   gulp.watch('./script/index.js', ['babel']);
   gulp.watch("*.html").on('change', browserSync.reload);
+  gulp.watch("./sass/**/*.scss").on('change', browserSync.reload);
 
 });
