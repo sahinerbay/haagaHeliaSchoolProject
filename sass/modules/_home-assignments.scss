@@ -5,8 +5,12 @@
     width: 100%;
     height: 50%;
     background-color: $secondary-color;
-    &__title {
-        @include assignmentTitle($primary-color)
+    &__center {
+        @include center;
+        &__title {
+            @include assignmentTitle($primary-color);
+        }
+        
     }
     @include atSmall {
         &__small {

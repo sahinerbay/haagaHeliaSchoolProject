@@ -37,7 +37,8 @@ table {
 
 body {
   font-size: 62.5%;
-  line-height: 1.5; }
+  line-height: 1.5;
+  font-family: "OpenSansBold", sans-serif; }
 
 .container {
   position: relative;
@@ -52,15 +53,16 @@ body {
   width: 100%;
   height: 50%;
   background-color: #fff; }
-  .home-assignments__title {
+  .home-assignments__center {
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    color: #0079c2;
-    text-align: center; }
+    transform: translate(-50%, -50%); }
+    .home-assignments__center__title {
+      font-size: 2rem;
+      color: #0079c2;
+      text-align: center; }
   @media (min-width: 530px) {
     .home-assignments__small {
       width: 50%;
@@ -69,24 +71,65 @@ body {
       top: 0;
       left: 0; } }
 
-.lab-assignments {
+.restaurant {
   position: fixed;
   bottom: 0;
   right: 0;
   width: 100%;
   height: 50%;
   background-color: #0079c2; }
-  .lab-assignments__title {
+  .restaurant__center {
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    color: #fff;
-    text-align: center; }
+    transform: translate(-50%, -50%); }
+    .restaurant__center__title {
+      font-size: 2rem;
+      color: #fff;
+      text-align: center; }
+    .restaurant__center__button {
+      overflow: hidden;
+      border: 3px solid #fff;
+      color: #fff;
+      background: none;
+      cursor: pointer;
+      padding: 25px 80px;
+      display: inline-block;
+      margin: 15px 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      outline: none;
+      position: relative;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s; }
+      .restaurant__center__button:hover {
+        color: #0079c2; }
+        .restaurant__center__button:hover:after {
+          height: 260%;
+          opacity: 1; }
+      .restaurant__center__button:active {
+        color: #0079c2; }
+        .restaurant__center__button:active:after {
+          height: 400%;
+          opacity: 1; }
+      .restaurant__center__button:after {
+        width: 100%;
+        height: 0;
+        top: 50%;
+        left: 50%;
+        background: #fff;
+        opacity: 0;
+        -webkit-transform: translateX(-50%) translateY(-50%) translateZ(0) rotate(45deg);
+        transform: translateX(-50%) translateY(-50%) translateZ(0) rotate(45deg);
+        content: '';
+        position: absolute;
+        z-index: -1;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s; }
   @media (min-width: 530px) {
-    .lab-assignments__small {
+    .restaurant__small {
       width: 50%;
       height: 100%;
       top: 0;

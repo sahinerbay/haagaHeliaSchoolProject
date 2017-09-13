@@ -16,12 +16,33 @@
     }
 }
 
-@mixin assignmentTitle($color) {
+@mixin center {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+@mixin assignmentTitle($color) {
     font-size: 2rem;
     color: $color;
     text-align: center;
+}
+
+@mixin buttonAtHomePage {
+    overflow: hidden;
+    border: 3px solid #fff;
+    color: #fff;
+    background: none;
+    cursor: pointer;
+    padding: 25px 80px;
+    display: inline-block;
+    margin: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
 }

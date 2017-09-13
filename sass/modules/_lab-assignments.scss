@@ -1,12 +1,46 @@
-.lab-assignments {
+.restaurant {
     position: fixed;
     bottom: 0;
     right: 0;
     width: 100%;
     height: 50%;
     background-color: $primary-color;
-    &__title {
-        @include assignmentTitle($secondary-color)
+    &__center {
+        @include center;
+        &__title {
+            @include assignmentTitle($secondary-color)
+        }
+        &__button {
+            @include buttonAtHomePage;
+            &:hover{
+                color: $primary-color;
+                &:after {
+                    height: 260%;
+                    opacity: 1;
+                }
+            }
+            &:active {
+                color: $primary-color;
+                &:after {
+                    height: 400%;
+                    opacity: 1;
+                }
+            }
+            &:after {
+                width: 100%;
+                height: 0;
+                top: 50%;
+                left: 50%;
+                background: #fff;
+                opacity: 0;
+                transform: translateX(-50%) translateY(-50%) translateZ(0) rotate(45deg);
+                content: '';
+                position: absolute;
+                z-index: -1;
+                transition: all 0.3s;
+            }
+        }
+        
     }
     @include atSmall {
         &__small {
