@@ -22,16 +22,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 @mixin assignmentTitle($color) {
     font-size: 2rem;
     color: $color;
     text-align: center;
 }
 
-@mixin buttonAtHomePage {
+@mixin buttonAtHomePage ($hover-text-color, $text-color, $border-color, $hover-background-color) {
     overflow: hidden;
-    border: 3px solid #fff;
-    color: #fff;
+    border: 3px solid $border-color;
+    color: $text-color;
     background: none;
     cursor: pointer;
     padding: 25px 80px;
@@ -42,7 +43,32 @@
     font-weight: 700;
     outline: none;
     position: relative;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
     transition: all 0.3s;
+    &:hover {
+        color: $hover-text-color;
+        &:after {
+            height: 260%;
+            opacity: 1;
+        }
+    }
+    &:active {
+        color: $hover-text-color;
+        &:after {
+            height: 400%;
+            opacity: 1;
+        }
+    }
+    &:after {
+        width: 100%;
+        height: 0;
+        top: 50%;
+        left: 50%;
+        background: $hover-background-color;
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50%) translateZ(0) rotate(45deg);
+        content: '';
+        position: absolute;
+        z-index: -1;
+        transition: all 0.3s;
+    }
 }

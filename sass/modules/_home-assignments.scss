@@ -10,7 +10,9 @@
         &__title {
             @include assignmentTitle($primary-color);
         }
-        
+        &__button {
+            @include buttonAtHomePage($button-amica-hover-color, $button-amica-text-color, $button-amica-border-color, $button-amica-hover-backgrond-color);
+        }
     }
     @include atSmall {
         &__small {
