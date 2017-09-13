@@ -54,7 +54,5 @@ gulp.task('sass:watch', function () {
 
   gulp.watch('./sass/**/*.scss', ['sass']);
   gulp.watch('./scriptES6/index.js', ['babel']);
-  gulp.watch("*.html").on('change', browserSync.reload);
-  gulp.watch("./sass/**/*.scss").on('change', browserSync.reload);
-
+  gulp.watch(["*.html", "./sass/**/*.scss", "./scriptES6/index.js"]).on('change', browserSync.reload);
 });

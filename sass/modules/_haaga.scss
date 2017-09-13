@@ -1,4 +1,4 @@
-.restaurant {
+.haaga {
     position: fixed;
     bottom: 0;
     right: 0;
@@ -7,13 +7,9 @@
     background-color: $primary-color;
     &__center {
         @include center;
-        &__title {
-            @include assignmentTitle($secondary-color)
-        }
         &__button {
             @include buttonAtHomePage($button-haaga-hover-color, $button-haaga-text-color, $button-haaga-border-color, $button-haaga-hover-background-color);
         }
-        
     }
     @include atSmall {
         &__small {
@@ -22,7 +18,10 @@
             top: 0;
             bottom: 0;
             right: 0;
-         
+            transition: width 2s;
+            &--width-0 {
+                @include width-0;
+            }
         }
     }
 }
