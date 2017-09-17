@@ -59,8 +59,10 @@ body {
   width: 100%;
   height: 50%;
   background-color: #fff;
-  -webkit-transition: display 2s;
-  transition: display 2s; }
+  -webkit-transition: width 2s;
+  transition: width 2s; }
+  .amica--border {
+    border-right: 1px solid #007549; }
   .amica__center {
     position: absolute;
     top: 50%;
@@ -84,7 +86,9 @@ body {
       position: relative;
       -webkit-transition: all 0.3s;
       transition: all 0.3s;
-      text-decoration: none; }
+      text-decoration: none;
+      -webkit-transition: display 2s;
+      transition: display 2s; }
       .amica__center__button:hover {
         color: #fff; }
         .amica__center__button:hover:after {
@@ -118,8 +122,8 @@ body {
       left: 0; }
       .amica__small--width-0 {
         width: 0; }
-      .amica__small--width-100 {
-        width: 100%; } }
+      .amica__small--width-25 {
+        width: 25%; } }
 
 .haaga {
   position: fixed;

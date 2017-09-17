@@ -28,6 +28,10 @@
     width: 0;
 }
 
+@mixin width-25 {
+    width: 25%;
+}
+
 @mixin width-100 {
     width: 100%;
 }
