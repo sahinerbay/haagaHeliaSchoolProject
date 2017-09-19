@@ -11,6 +11,9 @@
             @include buttonAtHomePage($button-haaga-hover-color, $button-haaga-text-color, $button-haaga-border-color, $button-haaga-hover-background-color);
         }
     }
+    & img {
+        width: 80%;
+    }
     @include atSmall {
         &__small {
             width: 50%;
@@ -22,6 +25,30 @@
             &--width-0 {
                 @include width-0;
             }
+
+           & img {
+               width: 70%;
+           } 
+        }
+    }
+
+    @include atMedium {
+        &__medium {
+            
+        }
+
+        & img {
+            width: 69%;
+        }
+    }
+
+    @include atLarge {
+        &__large {
+            
+        }
+
+        & img {
+            width: 42%;
         }
     }
 }

@@ -40,11 +40,14 @@ body {
   line-height: 1.5;
   font-family: "OpenSansBold", sans-serif; }
 
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
 .container {
   position: relative;
   height: 100%;
-  width: 100%;
-  background-color: #900; }
+  width: 100%; }
 
 .hide {
   display: none; }
@@ -61,16 +64,16 @@ body {
   background-color: #fff;
   -webkit-transition: width 2s;
   transition: width 2s; }
-  .amica--border {
-    border-right: 1px solid #007549; }
-  .amica__center {
+  .amica__logo-50 {
+    width: 90%; }
+  .amica__center-center {
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center; }
-    .amica__center__button {
+    .amica__center-center__button {
       overflow: hidden;
       border: 3px solid #007549;
       color: #007549;
@@ -81,6 +84,7 @@ body {
       margin: 15px 30px;
       text-transform: uppercase;
       letter-spacing: 1px;
+      font-size: 1rem;
       font-weight: 700;
       outline: none;
       position: relative;
@@ -89,17 +93,17 @@ body {
       text-decoration: none;
       -webkit-transition: display 2s;
       transition: display 2s; }
-      .amica__center__button:hover {
+      .amica__center-center__button:hover {
         color: #fff; }
-        .amica__center__button:hover:after {
+        .amica__center-center__button:hover:after {
           height: 260%;
           opacity: 1; }
-      .amica__center__button:active {
+      .amica__center-center__button:active {
         color: #fff; }
-        .amica__center__button:active:after {
+        .amica__center-center__button:active:after {
           height: 400%;
           opacity: 1; }
-      .amica__center__button:after {
+      .amica__center-center__button:after {
         width: 100%;
         height: 0;
         top: 50%;
@@ -113,17 +117,32 @@ body {
         z-index: -1;
         -webkit-transition: all 0.3s;
         transition: all 0.3s; }
+  .amica__top-center {
+    text-align: center;
+    width: 100%; }
+    .amica__top-center img {
+      width: 300px !important; }
   @media (min-width: 530px) {
-    .amica__small {
-      width: 50%;
-      height: 100%;
-      bottom: 0;
+    .amica {
       top: 0;
-      left: 0; }
-      .amica__small--width-0 {
+      left: 0;
+      bottom: 0;
+      height: 100%; }
+      .amica--width-0 {
         width: 0; }
-      .amica__small--width-25 {
-        width: 25%; } }
+      .amica--width-50 {
+        width: 50%; }
+      .amica--width-100 {
+        position: relative;
+        width: 100%; }
+      .amica img {
+        width: 84%; } }
+  @media (min-width: 800px) {
+    .amica img {
+      width: 81%; } }
+  @media (min-width: 1325px) {
+    .amica img {
+      width: 50%; } }
 
 .haaga {
   position: fixed;
@@ -150,6 +169,7 @@ body {
       margin: 15px 30px;
       text-transform: uppercase;
       letter-spacing: 1px;
+      font-size: 1rem;
       font-weight: 700;
       outline: none;
       position: relative;
@@ -180,6 +200,8 @@ body {
         z-index: -1;
         -webkit-transition: all 0.3s;
         transition: all 0.3s; }
+  .haaga img {
+    width: 80%; }
   @media (min-width: 530px) {
     .haaga__small {
       width: 50%;
@@ -190,4 +212,57 @@ body {
       -webkit-transition: width 2s;
       transition: width 2s; }
       .haaga__small--width-0 {
-        width: 0; } }
+        width: 0; }
+      .haaga__small img {
+        width: 70%; } }
+  @media (min-width: 800px) {
+    .haaga img {
+      width: 69%; } }
+  @media (min-width: 1325px) {
+    .haaga img {
+      width: 42%; } }
+
+.row {
+  margin: 0 auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center; }
+  .row h3 {
+    font-size: 1.3rem;
+    font-weight: bold; }
+  .row p {
+    font-size: 1rem;
+    line-height: 1.7; }
+  .row table {
+    margin: 0 auto; }
+  .row > div {
+    margin-bottom: 10px;
+    opacity: 0.3; }
+  @media (min-width: 530px) {
+    .row {
+      padding: 30px; }
+      .row__small-12 {
+        width: 100%;
+        min-height: 100px;
+        margin-bottom: 15px; } }
+  @media (min-width: 800px) {
+    .row {
+      padding: 60px; }
+      .row__medium-6 {
+        width: 50%;
+        min-height: 200px;
+        padding-right: 30px;
+        float: left; } }
+  @media (min-width: 1325px) {
+    .row {
+      padding: 90px; }
+      .row__large-3 {
+        width: 25%;
+        height: 300px;
+        padding-right: 50px;
+        float: left; } }
+  .row::after {
+    display: table;
+    clear: both;
+    content: ""; }

@@ -7,29 +7,68 @@
     background-color: $secondary-color;
     transition: width 2s;
 
-    &--border {
-        border-right: 1px solid #007549;
+    &__logo-50 {
+        width: 90%;
     }
-    &__center {
+
+    &__center-center {
         @include center;
         &__button {
             @include buttonAtHomePage($button-amica-hover-color, $button-amica-text-color, $button-amica-border-color, $button-amica-hover-backgrond-color);
             transition: display 2s;
         }
     }
+
+    &__top-center {
+        @include top;
+
+        & img {
+            width: 300px !important;
+        }
+    }
+    
     @include atSmall {
-        &__small {
-            width: 50%;
-            height: 100%;
-            bottom: 0;
-            top: 0;
-            left: 0;
+        top: 0;   
+        left: 0;
+        bottom: 0;
+        height: 100%;
+
             &--width-0 {
                 @include width-0;
             }
-            &--width-25 {
-                @include width-25;
+
+            &--width-50 {
+                @include width-50;
             }
+
+            &--width-100 {
+                position: relative;
+                @include width-100;
+            }
+
+            & img {
+                width: 84%;
+            }
+    }
+
+    @include atMedium {
+        &__medium {
+
+        }
+
+        & img {
+            width: 81%;
+        }
+    }
+
+    @include atLarge {
+        &__large {
+
+        }
+
+        & img {
+            width: 50%;
         }
     }
 }
+

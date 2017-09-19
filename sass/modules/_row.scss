@@ -1,0 +1,58 @@
+.row {
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+
+    & h3 {
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+
+    & p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    & table {
+        margin: 0 auto;
+    }
+
+    & > div {
+        margin-bottom: 10px;
+        opacity: 0.3;
+    }
+    
+    @include atSmall {
+        padding: 30px;
+        &__small-12 {
+            width: 100%;
+            min-height: 100px;
+            margin-bottom: 15px;
+        }
+    }
+
+    @include atMedium {
+        padding: 60px;
+        &__medium-6 {
+            width: 50%;
+            min-height: 200px;
+            padding-right: 30px;
+            float: left;
+        }
+    }
+
+    @include atLarge {
+        padding: 90px;
+        &__large-3 {
+            width: 25%;
+            height: 300px;
+            padding-right: 50px;
+            float: left;
+        }        
+    }
+    
+    &::after {
+        @include clearfix;
+    }
+}

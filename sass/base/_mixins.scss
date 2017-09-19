@@ -11,9 +11,15 @@
 }
 
 @mixin atLarge {
-    @media (min-width: 1200px) {
+    @media (min-width: 1325px) {
         @content;
     }
+}
+
+@mixin clearfix {
+    display: table;
+    clear: both;
+    content: "";
 }
 
 @mixin center {
@@ -24,12 +30,21 @@
     text-align: center;
 }
 
+@mixin top {
+    text-align: center;
+    width: 100%;
+}
+
 @mixin width-0 {
     width: 0;
 }
 
 @mixin width-25 {
     width: 25%;
+}
+
+@mixin width-50 {
+    width: 50%;
 }
 
 @mixin width-100 {

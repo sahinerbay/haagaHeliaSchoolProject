@@ -4,11 +4,14 @@ body {
     font-family: $primary-font;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .container {
     position: relative;
     height: 100%;
     width: 100%;
-    background-color: #900;
 }
 
 .hide {

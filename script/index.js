@@ -1,84 +1,111 @@
-"use strict";
+'use strict';
 
-var getData = function getData(url, callback) {
-    $.ajax({
-        type: "GET",
-        url: url,
-        timeout: 2000
-    }).done(function (result) {
-        callback(result);
-    }).fail(function (textStatus, jqXHR) {
-        alert("Request failed: " + textStatus);
-    }).always(function () {
-        console.log("this will always be executed");
+var getAmicaBasic = function getAmicaBasic(url) {
+    return axios.get(url).then(function (response) {
+        return response.data;
+    }).catch(function (error) {
+        console.log(error);
     });
 };
 
-var todaysFormattedDate = function todaysFormattedDate() {
+var getAmicaLunch = function getAmicaLunch(url) {
+    return axios.get(url).then(function (response) {
+        return response.data;
+    }).catch(function (error) {
+        console.log(error);
+    });
+};
+
+var isItOpen = function isItOpen() {
+    var now = new Date();
+    var hours = now.getHours() + 1,
+        minutes = now.getMinutes(),
+        $el = void 0;
+
+    if (hours >= 10 && minutes >= 30 && hours < 14 && minutes <= 59 || hours >= 16 & minutes >= 0 && hours < 18 && minutes <= 59) {
+        $el = $('<p>OPEN!</p>');
+    } else $el = $('<p>CLOSED!</p>');
+
+    $el.insertAfter('.amica__top-center__restaurant-info__time');
+};
+
+var todaysFormattedDate = function todaysFormattedDate(isMonthStartWithZero) {
     var d = new Date(),
         curr_date = d.getDate(),
         curr_month = d.getMonth() + 1,
         curr_year = d.getFullYear();
-    if (curr_month < 10) {
+    if (isMonthStartWithZero && curr_month < 10) {
         curr_month = '0' + curr_month;
     }
-    var todaysDate = curr_year + "-" + curr_month + "-" + curr_date;
+    var todaysDate = curr_year + '-' + curr_month + '-' + curr_date;
     return todaysDate;
 };
 
+var addOpacityForInactiveDays = function addOpacityForInactiveDays() {
+    var day = new Date().getDay();
+    if (day == 0) {
+        day = 6;
+    } else day -= 1;
+
+    var $activeDay = $('.row > div').eq(day);
+    $activeDay.css('opacity', '1');
+};
+
 $(function () {
-    var hideElements = function hideElements() {
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+    var $amicaButton = $('.amica__center-center__button');
 
-        for (var index = 0; index < args.length; index++) {
-            var $element = $("." + args[index]);
-            if ($element.hasClass('haaga__small--width-25')) {
-                $element.removeClass('haaga__small--width-25');
-            }
-            $element.addClass('haaga__small--width-0');
-        }
-    };
-
-    var showElements = function showElements() {
-        for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-            args[_key2] = arguments[_key2];
-        }
-
-        for (var index = 0; index < args.length; index++) {
-            $("." + args[index]).addClass('haaga__small--width-25');
-        }
-    };
-
-    var createNode = function createNode(element) {
-        return document.createElement(element);
-    };
-
-    var createTextNode = function createTextNode(text) {
-        return document.createTextNode(text);
-    };
-
-    var $amicaButton = $('.amica__center__button');
-
-    $amicaButton.on('click', function (event) {
+    var amicaButtonClicked = function amicaButtonClicked(event) {
         event.preventDefault();
-        $('.amica').addClass('amica__small--width-25 amica--border');
-        hideElements('haaga');
-        $(this).fadeOut(1000); //hides the clicked button
 
-        var p = createNode('p'),
-            text = createTextNode('Helia-Bistro is a student café located in Haaga-Helia, Pasila, in Helsinki, next to Helsinki Fair Centre. Every day, we serve vegetarian dish, vegetarian soup and salad lunches. Students eating lunch at Helia-Bistro are entitled to a Kela meal subsidy.');
-        p.appendChild(text);
+        $('.amica').removeClass('amica--width-50').addClass('amica--width-100').fadeOut(0).fadeIn(1000);
+        $('.amica__center-center').removeClass('amica__center-center').addClass('amica__top-center');
 
-        $('.amica__center img').after(p);
-        var data = void 0;
-        var d = new Date();
-        getData('http://www.amica.fi/modules/json/json/Index?costNumber=0084&language=en', function (result) {
-            data = result.MenusForDays;
-            return data;
+        //hideElements('haaga')
+        $('.haaga').fadeOut(1000);
+        $amicaButton.fadeOut(0); //hides the clicked button
+        var todaysDate = todaysFormattedDate(true);
+        getAmicaBasic('http://www.amica.fi/modules/json/json/Index?costNumber=0084&language=en').then(function (restaurant) {
+            var $restaurantInfoDiv = $('\n                    <div class="amica__top-center__restaurant-info">\n                        <p class="amica__top-center__restaurant-info__name">' + restaurant.RestaurantName + '</p>\n                        <p class="amica__top-center__restaurant-info__link"><a href="' + restaurant.RestaurantUrl + '" target="_blank">Website</a></p>\n                    </div>\n                    ');
+            $('.amica__top-center').append($restaurantInfoDiv);
+            return restaurant.MenusForDays;
+        }).then(function (MenusForDays) {
+            var $restaurantInfo = $('.amica__top-center__restaurant-info');
+            var $time = $('<p class="amica__top-center__restaurant-info__time">Closed!</p>');
+            $restaurantInfo.append($time);
+
+            MenusForDays.forEach(function (element, index) {
+                if (element.Date.search(todaysDate) != -1) {
+                    $time.text(element.LunchTime);
+                    isItOpen();
+                }
+            });
+        }).catch(function (error) {
+            console.log(error);
         });
 
-        console.log(data);
-    });
+        var today = todaysFormattedDate(false);
+        getAmicaLunch('http://www.amica.fi/api/restaurant/menu/week?language=en&restaurantPageId=6143&weekDate=' + today).then(function (data) {
+            var $row = $('<div class="row row__small row__medium row__large"></div>');
+            data.LunchMenus.forEach(function (element) {
+                //creates columns by size (12-6-3)
+                var $column = $('<div class="row__small-12 row__medium-6 row__large-3"</div>');
+
+                //Checks if it's weekend!
+                if (element.Html) {
+                    $column.append('<h3>' + element.DayOfWeek + ' (' + element.Date + ')</h3>', element.Html);
+                    $row.append($column);
+                    $('.amica').append($row);
+                } else {
+                    $column.append('<h3>' + element.DayOfWeek + ' (' + element.Date + ')</h3>', '<p>Closed!</p>');
+                    $row.append($column);
+                    $('.amica').append($row);
+                }
+            });
+
+            $('.amica td').removeAttr('width valign');
+            addOpacityForInactiveDays();
+        });
+    };
+
+    $amicaButton.on('click', amicaButtonClicked);
 });
