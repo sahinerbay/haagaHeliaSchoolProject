@@ -3,6 +3,8 @@
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
 
     & h3 {
         font-size: 1.3rem;
@@ -27,7 +29,6 @@
         padding: 30px;
         &__small-12 {
             width: 100%;
-            min-height: 100px;
             margin-bottom: 15px;
         }
     }
@@ -36,9 +37,7 @@
         padding: 60px;
         &__medium-6 {
             width: 50%;
-            min-height: 200px;
             padding-right: 30px;
-            float: left;
         }
     }
 
@@ -46,9 +45,7 @@
         padding: 90px;
         &__large-3 {
             width: 25%;
-            height: 300px;
             padding-right: 50px;
-            float: left;
         }        
     }
     

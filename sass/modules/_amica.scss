@@ -5,7 +5,7 @@
     width: 100%;
     height: 50%;
     background-color: $secondary-color;
-    transition: width 2s;
+    transition: width 1s;
 
     &__logo-50 {
         width: 90%;
@@ -17,13 +17,42 @@
             @include buttonAtHomePage($button-amica-hover-color, $button-amica-text-color, $button-amica-border-color, $button-amica-hover-backgrond-color);
             transition: display 2s;
         }
+
+        &__logo {
+            @include atSmall{
+                width: 84%;
+            }
+
+            @include atMedium{
+                width: 81%;
+            }
+
+            @include atLarge{
+                width: 50%;
+            }
+        }
     }
 
     &__top-center {
         @include top;
 
-        & img {
+        &__logo {
             width: 300px !important;
+        }
+
+        &__restaurant-info {
+            font-size: 0.75rem;
+            line-height: 1.3rem;
+
+            &__name {
+                font-size: 1.2rem;
+            }
+            &__link a {
+                text-decoration: none;
+            }
+            &__isOpen {
+                font-weight: 700;
+            }
         }
     }
     
@@ -45,30 +74,7 @@
                 position: relative;
                 @include width-100;
             }
-
-            & img {
-                width: 84%;
-            }
     }
 
-    @include atMedium {
-        &__medium {
-
-        }
-
-        & img {
-            width: 81%;
-        }
-    }
-
-    @include atLarge {
-        &__large {
-
-        }
-
-        & img {
-            width: 50%;
-        }
-    }
 }
 

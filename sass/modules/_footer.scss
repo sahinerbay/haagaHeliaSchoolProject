@@ -1,0 +1,13 @@
+.footer {
+    text-align: center;
+    position: relative;
+    
+    &--absolute {
+        @include center;
+    }
+
+    &__button-amica {
+        @include buttonAtHomePage($button-amica-hover-color, $button-amica-text-color, $button-amica-border-color, $button-amica-hover-backgrond-color);
+        transition: display 2s;
+    }
+}
