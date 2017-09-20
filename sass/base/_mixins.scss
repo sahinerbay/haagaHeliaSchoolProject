@@ -51,3 +51,10 @@
     width: 100%;
 }
 
+@mixin hide {
+    display: none;
+}
+
+@mixin show {
+    display: inline-block;
+}

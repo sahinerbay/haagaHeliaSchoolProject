@@ -5,50 +5,64 @@
     width: 100%;
     height: 50%;
     background-color: $primary-color;
-    &__center {
+    transition: width 1s;
+    &__center-center {
         @include center;
         &__button {
             @include buttonAtHomePage($button-haaga-hover-color, $button-haaga-text-color, $button-haaga-border-color, $button-haaga-hover-background-color);
+            &-hide {
+                @include hide;
+            }
+            &-show {
+                @include show;
+            }
+        }
+        &__logo {
+            width: 80%;
+            @include atSmall {
+                width: 84%;
+            }
+            @include atMedium {
+                width: 81%;
+            }
+            @include atLarge {
+                width: 50%;
+            }
         }
     }
-    & img {
-        width: 80%;
+    &__top-center {
+        @include top;
+        &__logo {
+            width: 300px !important;
+        }
+        &__restaurant-info {
+            font-size: 0.75rem;
+            line-height: 1.3rem;
+            &__name {
+                font-size: 1.2rem;
+            }
+            &__link a {
+                text-decoration: none;
+            }
+            &__isOpen {
+                font-weight: 700;
+            }
+        }
     }
     @include atSmall {
-        &__small {
-            width: 50%;
-            height: 100%;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            transition: width 2s;
-            &--width-0 {
-                @include width-0;
-            }
-
-           & img {
-               width: 70%;
-           } 
+        top: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        &--width-0 {
+            @include width-0;
         }
-    }
-
-    @include atMedium {
-        &__medium {
-            
+        &--width-50 {
+            @include width-50;
         }
-
-        & img {
-            width: 69%;
-        }
-    }
-
-    @include atLarge {
-        &__large {
-            
-        }
-
-        & img {
-            width: 42%;
+        &--width-100 {
+            position: relative;
+            @include width-100;
         }
     }
 }
