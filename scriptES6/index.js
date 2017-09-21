@@ -168,19 +168,22 @@ $(function () {
         //Checks if the restaurant open atm
         let addOpenClose = (insertAfterEl) => {
             let now = new Date();
-            let hours = now.getHours() + 1,
+            let hours = now.getHours(),
                 minutes = now.getMinutes(),
-                $el = $('<p class = "amica__top-center__restaurant-info__isOpen"></p>');
-
+                $el = $('<p class = "amica__top-center__restaurant-info__isOpen"></p>'),
+                open = 'OPEN!',
+                closed = 'CLOSED!';
+console.log(hours)
             //10:30am-2.00pm and 4:00pm-6:00pm
             if (hours == 10) {
                 if ((minutes >= 30 && minutes <= 59)) {
-                    $el.text('OPEN!');
-                } else $el.text('CLOSED!');
+                    $el.text(open);
+                } else $el.text(closed);
             } else if (hours >= 11 && hours < 14) {
-                $el.text('OPEN!');
-            }
-
+                $el.text(open);
+            } else if (hours >= 16 && hours < 18) {
+                $el.text(open);
+            } else $el.text(closed);
             $el.insertAfter(insertAfterEl);
         };
 
