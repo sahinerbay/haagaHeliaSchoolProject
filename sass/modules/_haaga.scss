@@ -6,16 +6,14 @@
     height: 50%;
     background-color: $primary-color;
     transition: width 1s;
+
+    &--relative {
+        position: relative;
+    }
     &__center-center {
         @include center;
         &__button {
             @include buttonAtHomePage($button-haaga-hover-color, $button-haaga-text-color, $button-haaga-border-color, $button-haaga-hover-background-color);
-            &-hide {
-                @include hide;
-            }
-            &-show {
-                @include show;
-            }
         }
         &__logo {
             width: 80%;
@@ -61,7 +59,6 @@
             @include width-50;
         }
         &--width-100 {
-            position: relative;
             @include width-100;
         }
     }

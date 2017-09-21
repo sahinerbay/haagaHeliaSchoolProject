@@ -22,13 +22,17 @@
 
     & > div {
         margin-bottom: 10px;
-        opacity: 0.3;
     }
     
     @include atSmall {
         padding: 30px;
         &__small-12 {
             width: 100%;
+            margin-bottom: 15px;
+        }
+
+        &__small-4 {
+            width: 33%;
             margin-bottom: 15px;
         }
     }
@@ -39,6 +43,11 @@
             width: 50%;
             padding-right: 30px;
         }
+
+        &__medium-3 {
+            width: 25%;
+            padding-right: 30px;
+        }
     }
 
     @include atLarge {
@@ -46,10 +55,11 @@
         &__large-3 {
             width: 25%;
             padding-right: 50px;
-        }        
-    }
-    
-    &::after {
-        @include clearfix;
+        } 
+        
+        &__large-2 {
+            width: 16.6%;
+            padding-right: 50px;
+        } 
     }
 }
