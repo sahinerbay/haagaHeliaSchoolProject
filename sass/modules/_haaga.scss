@@ -7,6 +7,18 @@
     background-color: $primary-color;
     transition: width 1s;
 
+    &--height-0 {
+        @include height-0;
+    }
+
+    &--height-50 {
+        @include height-50;
+    }
+
+    &--height-100 {
+        @include height-100;
+    }
+
     &--relative {
         position: relative;
     }
@@ -14,20 +26,59 @@
         @include center;
         &__button {
             @include buttonAtHomePage($button-haaga-hover-color, $button-haaga-text-color, $button-haaga-border-color, $button-haaga-hover-background-color);
+            padding: 10px 30px;
         }
         &__logo {
             width: 80%;
-            @include atSmall {
-                width: 84%;
+        }
+    }
+    @include atSmall {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        &--width-0 {
+            @include width-0;
+        }
+        &--width-50 {
+            @include width-50;
+        }
+        &--width-100 {
+            @include width-100;
+        }
+        &__center-center {
+        @include center;
+            &__button {
+                padding: 15px 40px;
             }
-            @include atMedium {
-                width: 81%;
-            }
-            @include atLarge {
-                width: 50%;
+            &__logo {
+                width: 80%;
             }
         }
     }
+    @include atMedium {
+        &__center-center {
+        @include center;
+            &__button {
+                @include buttonAtHomePage($button-haaga-hover-color, $button-haaga-text-color, $button-haaga-border-color, $button-haaga-hover-background-color);
+            }
+            &__logo {
+                width: 80%;
+            }
+        }
+    }
+    @include atLarge {
+        &__center-center {
+        @include center;
+            &__button {
+                @include buttonAtHomePage($button-haaga-hover-color, $button-haaga-text-color, $button-haaga-border-color, $button-haaga-hover-background-color);
+            }
+            &__logo {
+                width: 70%;
+            }
+        }
+    }
+
     &__top-center {
         @include top;
         &__logo {
@@ -45,21 +96,6 @@
             &__isOpen {
                 font-weight: 700;
             }
-        }
-    }
-    @include atSmall {
-        top: 0;
-        right: 0;
-        bottom: 0;
-        height: 100%;
-        &--width-0 {
-            @include width-0;
-        }
-        &--width-50 {
-            @include width-50;
-        }
-        &--width-100 {
-            @include width-100;
         }
     }
 }

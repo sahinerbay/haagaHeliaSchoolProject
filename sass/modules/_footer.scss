@@ -1,5 +1,9 @@
 .footer {
     text-align: center;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    position: relative;
     
     &__button-amica {
         @include buttonAtHomePage($button-amica-hover-color, $button-amica-text-color, $button-amica-border-color, $button-amica-hover-backgrond-color);

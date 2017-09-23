@@ -1,4 +1,4 @@
-@mixin buttonAtHomePage ($hover-text-color, $text-color, $border-color, $hover-background-color, $zIndex: -1) {
+@mixin buttonAtHomePage ($hover-text-color, $text-color, $border-color, $hover-background-color) {
     overflow: hidden;
     border: 3px solid $border-color;
     color: $text-color;
@@ -39,7 +39,7 @@
         transform: translateX(-50%) translateY(-50%) translateZ(0) rotate(45deg);
         content: '';
         position: absolute;
-        z-index: $zIndex;
+        z-index: -1;
         transition: all 0.3s;
     }
 }

@@ -57,21 +57,27 @@ body {
 
 .amica {
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 50%;
   background-color: #fff;
   -webkit-transition: width 1s;
   transition: width 1s; }
+  .amica--height-0 {
+    height: 0 !important; }
+  .amica--height-50 {
+    height: 50% !important; }
+  .amica--height-100 {
+    height: 100% !important; }
   .amica--relative {
     position: relative; }
   .amica__center-center {
     position: absolute;
-    top: 50%;
-    left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
     text-align: center; }
     .amica__center-center__button {
       overflow: hidden;
@@ -91,8 +97,7 @@ body {
       -webkit-transition: all 0.3s;
       transition: all 0.3s;
       text-decoration: none;
-      -webkit-transition: display 2s;
-      transition: display 2s; }
+      padding: 10px 30px; }
       .amica__center-center__button:hover {
         color: #fff; }
         .amica__center-center__button:hover:after {
@@ -117,15 +122,55 @@ body {
         z-index: -1;
         -webkit-transition: all 0.3s;
         transition: all 0.3s; }
-    @media (min-width: 530px) {
+    .amica__center-center__logo {
+      width: 80%; }
+  @media (min-width: 530px) {
+    .amica {
+      top: 0;
+      left: 0;
+      bottom: 0;
+      height: 100%; }
+      .amica--width-0 {
+        width: 0; }
+      .amica--width-50 {
+        width: 50%; }
+      .amica--width-100 {
+        width: 100%; }
+      .amica__center-center {
+        position: absolute;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        text-align: center; }
+        .amica__center-center__button {
+          padding: 15px 40px; }
+        .amica__center-center__logo {
+          width: 80%; } }
+  @media (min-width: 800px) {
+    .amica__center-center {
+      position: absolute;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      text-align: center; }
+      .amica__center-center__button {
+        padding: 25px 80px; }
       .amica__center-center__logo {
-        width: 84%; } }
-    @media (min-width: 800px) {
+        width: 80%; } }
+  @media (min-width: 1325px) {
+    .amica__center-center {
+      position: absolute;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      text-align: center; }
+      .amica__center-center__button {
+        padding: 25px 80px; }
       .amica__center-center__logo {
-        width: 81%; } }
-    @media (min-width: 1325px) {
-      .amica__center-center__logo {
-        width: 50%; } }
+        width: 70%; } }
   .amica__top-center {
     text-align: center;
     width: 100%; }
@@ -140,18 +185,6 @@ body {
         text-decoration: none; }
       .amica__top-center__restaurant-info__isOpen {
         font-weight: 700; }
-  @media (min-width: 530px) {
-    .amica {
-      top: 0;
-      left: 0;
-      bottom: 0;
-      height: 100%; }
-      .amica--width-0 {
-        width: 0; }
-      .amica--width-50 {
-        width: 50%; }
-      .amica--width-100 {
-        width: 100%; } }
 
 .haaga {
   position: fixed;
@@ -162,14 +195,20 @@ body {
   background-color: #0079c2;
   -webkit-transition: width 1s;
   transition: width 1s; }
+  .haaga--height-0 {
+    height: 0 !important; }
+  .haaga--height-50 {
+    height: 50% !important; }
+  .haaga--height-100 {
+    height: 100% !important; }
   .haaga--relative {
     position: relative; }
   .haaga__center-center {
     position: absolute;
-    top: 50%;
-    left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
     text-align: center; }
     .haaga__center-center__button {
       overflow: hidden;
@@ -188,7 +227,8 @@ body {
       position: relative;
       -webkit-transition: all 0.3s;
       transition: all 0.3s;
-      text-decoration: none; }
+      text-decoration: none;
+      padding: 10px 30px; }
       .haaga__center-center__button:hover {
         color: #0079c2; }
         .haaga__center-center__button:hover:after {
@@ -215,15 +255,133 @@ body {
         transition: all 0.3s; }
     .haaga__center-center__logo {
       width: 80%; }
-      @media (min-width: 530px) {
+  @media (min-width: 530px) {
+    .haaga {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%; }
+      .haaga--width-0 {
+        width: 0; }
+      .haaga--width-50 {
+        width: 50%; }
+      .haaga--width-100 {
+        width: 100%; }
+      .haaga__center-center {
+        position: absolute;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        text-align: center; }
+        .haaga__center-center__button {
+          padding: 15px 40px; }
         .haaga__center-center__logo {
-          width: 84%; } }
-      @media (min-width: 800px) {
-        .haaga__center-center__logo {
-          width: 81%; } }
-      @media (min-width: 1325px) {
-        .haaga__center-center__logo {
-          width: 50%; } }
+          width: 80%; } }
+  @media (min-width: 800px) {
+    .haaga__center-center {
+      position: absolute;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      text-align: center; }
+      .haaga__center-center__button {
+        overflow: hidden;
+        border: 3px solid #fff;
+        color: #fff;
+        background: none;
+        cursor: pointer;
+        padding: 25px 80px;
+        display: inline-block;
+        margin: 15px 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1rem;
+        font-weight: 700;
+        outline: none;
+        position: relative;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        text-decoration: none; }
+        .haaga__center-center__button:hover {
+          color: #0079c2; }
+          .haaga__center-center__button:hover:after {
+            height: 260%;
+            opacity: 1; }
+        .haaga__center-center__button:active {
+          color: #0079c2; }
+          .haaga__center-center__button:active:after {
+            height: 400%;
+            opacity: 1; }
+        .haaga__center-center__button:after {
+          width: 100%;
+          height: 0;
+          top: 50%;
+          left: 50%;
+          background: #fff;
+          opacity: 0;
+          -webkit-transform: translateX(-50%) translateY(-50%) translateZ(0) rotate(45deg);
+          transform: translateX(-50%) translateY(-50%) translateZ(0) rotate(45deg);
+          content: '';
+          position: absolute;
+          z-index: -1;
+          -webkit-transition: all 0.3s;
+          transition: all 0.3s; }
+      .haaga__center-center__logo {
+        width: 80%; } }
+  @media (min-width: 1325px) {
+    .haaga__center-center {
+      position: absolute;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      text-align: center; }
+      .haaga__center-center__button {
+        overflow: hidden;
+        border: 3px solid #fff;
+        color: #fff;
+        background: none;
+        cursor: pointer;
+        padding: 25px 80px;
+        display: inline-block;
+        margin: 15px 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1rem;
+        font-weight: 700;
+        outline: none;
+        position: relative;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        text-decoration: none; }
+        .haaga__center-center__button:hover {
+          color: #0079c2; }
+          .haaga__center-center__button:hover:after {
+            height: 260%;
+            opacity: 1; }
+        .haaga__center-center__button:active {
+          color: #0079c2; }
+          .haaga__center-center__button:active:after {
+            height: 400%;
+            opacity: 1; }
+        .haaga__center-center__button:after {
+          width: 100%;
+          height: 0;
+          top: 50%;
+          left: 50%;
+          background: #fff;
+          opacity: 0;
+          -webkit-transform: translateX(-50%) translateY(-50%) translateZ(0) rotate(45deg);
+          transform: translateX(-50%) translateY(-50%) translateZ(0) rotate(45deg);
+          content: '';
+          position: absolute;
+          z-index: -1;
+          -webkit-transition: all 0.3s;
+          transition: all 0.3s; }
+      .haaga__center-center__logo {
+        width: 70%; } }
   .haaga__top-center {
     text-align: center;
     width: 100%; }
@@ -238,18 +396,6 @@ body {
         text-decoration: none; }
       .haaga__top-center__restaurant-info__isOpen {
         font-weight: 700; }
-  @media (min-width: 530px) {
-    .haaga {
-      top: 0;
-      right: 0;
-      bottom: 0;
-      height: 100%; }
-      .haaga--width-0 {
-        width: 0; }
-      .haaga--width-50 {
-        width: 50%; }
-      .haaga--width-100 {
-        width: 100%; } }
 
 .row {
   margin: 0 auto;
@@ -301,7 +447,12 @@ body {
         padding-right: 50px; } }
 
 .footer {
-  text-align: center; }
+  text-align: center;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  position: relative; }
   .footer__button-amica {
     overflow: hidden;
     border: 3px solid #007549;

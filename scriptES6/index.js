@@ -1,12 +1,23 @@
 $(function () {
 
+    let getPhoneScreen = (value) => {
+        const mq = window.matchMedia(`(max-width: ${value})`);
+        return mq.matches;
+    };
+
+    let isMobile = getPhoneScreen('529px');
+
     //Adding core html for homepage
-    let init = function () {
-        let $container = $('.container');
+    let init = function (size) {
+        let $container = $('.container'),
+            classAttr;
+
+        if (size) classAttr = 'height';
+        else classAttr = 'width';
 
         let amica = () => {
             $container.append(`
-                <div class="amica amica--width-50">
+                <div class="amica amica--${classAttr}-50">
                     <div class="amica__center-center">
                         <img class="amica__center-center__logo" src="./image/amica-brand-logo.png" alt="amica logo">
                         <a href="" class="amica__center-center__button" title="Check Amica Lunch Options">Enter</a>
@@ -17,7 +28,7 @@ $(function () {
 
         let haaga = () => {
             $container.append(`
-                <div class="haaga haaga--width-50">
+                <div class="haaga haaga--${classAttr}-50">
                     <div class="haaga__center-center">
                         <img class="haaga__center-center__logo" src="./image/haaga-helia-logo.png" alt="haaga-helia logo">
                         <a href="" class="haaga__center-center__button" title="Read More Information About Haaga-Helia">Enter</a>
@@ -30,21 +41,31 @@ $(function () {
             amica: amica,
             haaga: haaga
         }
-    }();
+    }(isMobile);
 
     init.amica();
     init.haaga();
+
+    window.addEventListener("orientationchange", function () {
+        let isMobile = getPhoneScreen('529px');
+
+        if ((screen.orientation.angle == -90 || screen.orientation.angle == 90) && isMobile) {
+            $amica.container.attr('class', 'amica amica--width-50');
+            $haaga.container.attr('class', 'haaga haaga--width-50');
+        } else if ((screen.orientation.angle == 0) && isMobile) {
+            $amica.container.attr('class', 'amica amica--height-50');
+            $haaga.container.attr('class', 'haaga haaga--height-50');
+        }
+    }, false);
 
     //adds 'back to home' button
     let addReturnButton = (element) => {
         let $footer = $(`
         <div class = 'footer'>
-            <div class = 'footer--absolute'>
                 <a class = 'footer__button-${element}'>Go Back</a>    
-            </div>
         </div>
     `);
-        $(`.${element}--width-100`).append($footer);
+        $(`.${element}`).append($footer);
     };
 
     let insertRow = () => {
@@ -156,7 +177,6 @@ $(function () {
             } else today -= 1
 
             for (let days = 0; days < 7; days++) {
-                console.log('hello')
                 if (days == today) continue;
                 let $activeDay = $('.row > div').eq(days);
                 $activeDay.css({
@@ -173,7 +193,6 @@ $(function () {
                 $el = $('<p class = "amica__top-center__restaurant-info__isOpen"></p>'),
                 open = 'OPEN!',
                 closed = 'CLOSED!';
-console.log(hours)
             //10:30am-2.00pm and 4:00pm-6:00pm
             if (hours == 10) {
                 if ((minutes >= 30 && minutes <= 59)) {
@@ -245,13 +264,20 @@ console.log(hours)
         let amicaHomeButtonClicked = (event) => {
             event.preventDefault();
 
-            $amica.container.removeClass('amica--width-50').addClass('amica--width-100 amica--relative');
-            $haaga.container.removeClass('haaga--width-50').addClass('haaga--width-0');
+            let isMobile = getPhoneScreen('529px');
 
+            if (isMobile) {
+                $amica.container.attr('class', 'amica amica--height-100 amica--relative');
+                $haaga.container.attr('class', 'haaga haaga--height-0');
+            } else {
+                $amica.container.attr('class', 'amica amica--width-100 amica--relative');
+                $haaga.container.attr('class', 'haaga haaga--width-0');
+            }
             $amica.center.removeClass('amica__center-center').addClass('amica__top-center');
             $amica.center_logo.removeClass('amica__center-center__logo').addClass('amica__top-center__logo');
 
             buttons.$amicaHome.fadeOut(0);
+            $haaga.center.fadeOut(0);
 
             amicaAPI.getRestaurantInfo()
                 .then((restaurant) => {
@@ -261,11 +287,16 @@ console.log(hours)
                     let todaysDate = todaysFormattedDate(true);
                     let $restaurantTime = $('.amica__top-center__restaurant-info__time');
 
-                    //loop through weekly menus
+                    //loops through each day of the week
                     restaurant.MenusForDays.forEach((element, index) => {
+                        //for weekdays
                         if (element.Date.search(todaysDate) != -1) { // search today's meal
                             $restaurantTime.text(element.LunchTime); // show today's meal
                             amicaAPI.addOpenClose($restaurantTime); // checks if restaurant open and insert paragraph (open/closed)
+                        }
+                        //for weekend 
+                        else {
+                            $('.amica__top-center__restaurant-info__isOpen').text('CLOSED!');
                         }
                     });
                 })
@@ -281,8 +312,9 @@ console.log(hours)
                         //creates columns by size (12-6-3)
                         let $column = amicaAPI.addLunchInfo(today);
                         $row.append($column);
-                        $amica.container.append($row);
                     });
+
+                    $amica.container.append($row);
 
                     //remove the attritube that came from Amica API
                     $('.amica td').removeAttr('width valign');
@@ -298,60 +330,85 @@ console.log(hours)
         let amicaReturnButtonClicked = (event) => {
             event.preventDefault();
 
-            $amica.container.removeClass('amica--width-100 amica--relative').addClass('amica--width-50');
+            let isMobile = getPhoneScreen('529px');
+
+            if (isMobile) {
+                $amica.container.attr('class', 'amica amica--height-50');
+                $haaga.container.attr('class', 'haaga haaga--height-50');
+            } else {
+                $amica.container.attr('class', 'amica amica--width-50');
+                $haaga.container.attr('class', 'haaga haaga--width-50');
+            }
+
             let $amica__top_center = $('.amica__top-center'),
                 $amica__top_center__logo = $('.amica__top-center__logo');
 
             $amica__top_center.removeClass('amica__top-center').addClass('amica__center-center');
-            $amica__top_center__logo.removeClass('amica__top-center__logo').addClass('amica__center_center__logo');
-
-            $haaga.container.removeClass('haaga--width-0').addClass('haaga--width-50');
+            $amica__top_center__logo.removeClass('amica__top-center__logo').addClass('amica__center-center__logo');
 
             $('.footer').remove();
             $('.row').remove();
             $('.amica__top-center__restaurant-info').remove();
 
             buttons.$amicaHome.fadeIn(0);
+            $haaga.center.fadeIn(0);
         };
 
         let haagaHomeButtonClicked = (event) => {
             event.preventDefault();
 
-            $amica.container.removeClass('amica--width-50').addClass('amica--width-0');
-            $haaga.container.removeClass('haaga--width-50').addClass('haaga--width-100 haaga--relative');
+            let isMobile = getPhoneScreen('529px');
+
+            if (isMobile) {
+                $amica.container.attr('class', 'amica amica--height-0');
+                $haaga.container.attr('class', 'haaga haaga--height-100 haaga--relative');
+            } else {
+                $amica.container.attr('class', 'amica amica--width-0');
+                $haaga.container.attr('class', 'haaga haaga--width-100 haaga--relative');
+            }
 
             $haaga.center.removeClass('haaga__center-center').addClass('haaga__top-center');
             $haaga.center_logo.removeClass('haaga__center-center__logo').addClass('haaga__top-center__logo');
 
             buttons.$haagaHome.fadeOut(0);
+            $amica.center.fadeOut(0);
 
-            haagaFlickrAPI.getPhotos().then(response => {
-                let $row = insertRow();
-                response.photos.photo.forEach(element => {
-                    let url = haagaFlickrAPI.buildThumbnailUrl(element);
-                    $row.append(haagaFlickrAPI.addContent(url));
+            haagaFlickrAPI.getPhotos()
+                .then(response => {
+                    let $row = insertRow();
+                    response.photos.photo.forEach(element => {
+                        let url = haagaFlickrAPI.buildThumbnailUrl(element);
+                        $row.append(haagaFlickrAPI.addContent(url));
+                    });
+                    $haaga.container.append($row);
+                    addReturnButton('haaga');
                 });
-                $haaga.container.append($row);
-                addReturnButton('haaga');
-            });
         };
 
         let haagaReturnButtonClicked = (event) => {
             event.preventDefault();
 
-            $haaga.container.removeClass('haaga--width-100 haaga--relative').addClass('haaga--width-50');
+            let isMobile = getPhoneScreen('529px');
+
+            if (isMobile) {
+                $amica.container.attr('class', 'amica amica--height-50');
+                $haaga.container.attr('class', 'haaga haaga--height-50');
+            } else {
+                $amica.container.attr('class', 'amica amica--width-50');
+                $haaga.container.attr('class', 'haaga haaga--width-50');
+            }
+
             let $haaga__top_center = $('.haaga__top-center'),
                 $haaga__top_center__logo = $('.haaga__top-center__logo');
 
             $haaga__top_center.removeClass('haaga__top-center').addClass('haaga__center-center');
-            $haaga__top_center__logo.removeClass('haaga__top-center__logo').addClass('haaga__center_center__logo');
-
-            $amica.container.removeClass('amica--width-0').addClass('amica--width-50');
+            $haaga__top_center__logo.removeClass('haaga__top-center__logo').addClass('haaga__center-center__logo');
 
             $('.footer').remove();
             $('.row').remove();
 
             buttons.$haagaHome.fadeIn(0);
+            $amica.center.fadeIn(0);
         };
 
         return {

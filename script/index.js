@@ -2,31 +2,53 @@
 
 $(function () {
 
+    var getPhoneScreen = function getPhoneScreen(value) {
+        var mq = window.matchMedia('(max-width: ' + value + ')');
+        return mq.matches;
+    };
+
+    var isMobile = getPhoneScreen('529px');
+
     //Adding core html for homepage
-    var init = function () {
-        var $container = $('.container');
+    var init = function (size) {
+        var $container = $('.container'),
+            classAttr = void 0;
+
+        if (size) classAttr = 'height';else classAttr = 'width';
 
         var amica = function amica() {
-            $container.append('\n                <div class="amica amica--width-50">\n                    <div class="amica__center-center">\n                        <img class="amica__center-center__logo" src="./image/amica-brand-logo.png" alt="amica logo">\n                        <a href="" class="amica__center-center__button" title="Check Amica Lunch Options">Enter</a>\n                    </div>\n                </div>\n            ');
+            $container.append('\n                <div class="amica amica--' + classAttr + '-50">\n                    <div class="amica__center-center">\n                        <img class="amica__center-center__logo" src="./image/amica-brand-logo.png" alt="amica logo">\n                        <a href="" class="amica__center-center__button" title="Check Amica Lunch Options">Enter</a>\n                    </div>\n                </div>\n            ');
         };
 
         var haaga = function haaga() {
-            $container.append('\n                <div class="haaga haaga--width-50">\n                    <div class="haaga__center-center">\n                        <img class="haaga__center-center__logo" src="./image/haaga-helia-logo.png" alt="haaga-helia logo">\n                        <a href="" class="haaga__center-center__button" title="Read More Information About Haaga-Helia">Enter</a>\n                    </div>\n                </div>\n            ');
+            $container.append('\n                <div class="haaga haaga--' + classAttr + '-50">\n                    <div class="haaga__center-center">\n                        <img class="haaga__center-center__logo" src="./image/haaga-helia-logo.png" alt="haaga-helia logo">\n                        <a href="" class="haaga__center-center__button" title="Read More Information About Haaga-Helia">Enter</a>\n                    </div>\n                </div>\n            ');
         };
 
         return {
             amica: amica,
             haaga: haaga
         };
-    }();
+    }(isMobile);
 
     init.amica();
     init.haaga();
 
+    window.addEventListener("orientationchange", function () {
+        var isMobile = getPhoneScreen('529px');
+
+        if ((screen.orientation.angle == -90 || screen.orientation.angle == 90) && isMobile) {
+            $amica.container.attr('class', 'amica amica--width-50');
+            $haaga.container.attr('class', 'haaga haaga--width-50');
+        } else if (screen.orientation.angle == 0 && isMobile) {
+            $amica.container.attr('class', 'amica amica--height-50');
+            $haaga.container.attr('class', 'haaga haaga--height-50');
+        }
+    }, false);
+
     //adds 'back to home' button
     var addReturnButton = function addReturnButton(element) {
-        var $footer = $('\n        <div class = \'footer\'>\n            <div class = \'footer--absolute\'>\n                <a class = \'footer__button-' + element + '\'>Go Back</a>    \n            </div>\n        </div>\n    ');
-        $('.' + element + '--width-100').append($footer);
+        var $footer = $('\n        <div class = \'footer\'>\n                <a class = \'footer__button-' + element + '\'>Go Back</a>    \n        </div>\n    ');
+        $('.' + element).append($footer);
     };
 
     var insertRow = function insertRow() {
@@ -131,7 +153,6 @@ $(function () {
             } else today -= 1;
 
             for (var days = 0; days < 7; days++) {
-                console.log('hello');
                 if (days == today) continue;
                 var $activeDay = $('.row > div').eq(days);
                 $activeDay.css({
@@ -148,7 +169,6 @@ $(function () {
                 $el = $('<p class = "amica__top-center__restaurant-info__isOpen"></p>'),
                 open = 'OPEN!',
                 closed = 'CLOSED!';
-            console.log(hours);
             //10:30am-2.00pm and 4:00pm-6:00pm
             if (hours == 10) {
                 if (minutes >= 30 && minutes <= 59) {
@@ -216,13 +236,20 @@ $(function () {
         var amicaHomeButtonClicked = function amicaHomeButtonClicked(event) {
             event.preventDefault();
 
-            $amica.container.removeClass('amica--width-50').addClass('amica--width-100 amica--relative');
-            $haaga.container.removeClass('haaga--width-50').addClass('haaga--width-0');
+            var isMobile = getPhoneScreen('529px');
 
+            if (isMobile) {
+                $amica.container.attr('class', 'amica amica--height-100 amica--relative');
+                $haaga.container.attr('class', 'haaga haaga--height-0');
+            } else {
+                $amica.container.attr('class', 'amica amica--width-100 amica--relative');
+                $haaga.container.attr('class', 'haaga haaga--width-0');
+            }
             $amica.center.removeClass('amica__center-center').addClass('amica__top-center');
             $amica.center_logo.removeClass('amica__center-center__logo').addClass('amica__top-center__logo');
 
             buttons.$amicaHome.fadeOut(0);
+            $haaga.center.fadeOut(0);
 
             amicaAPI.getRestaurantInfo().then(function (restaurant) {
                 var $amica__top_center__restaurant_info = amicaAPI.addRestaurantInfo(restaurant);
@@ -231,13 +258,18 @@ $(function () {
                 var todaysDate = todaysFormattedDate(true);
                 var $restaurantTime = $('.amica__top-center__restaurant-info__time');
 
-                //loop through weekly menus
+                //loops through each day of the week
                 restaurant.MenusForDays.forEach(function (element, index) {
+                    //for weekdays
                     if (element.Date.search(todaysDate) != -1) {
                         // search today's meal
                         $restaurantTime.text(element.LunchTime); // show today's meal
                         amicaAPI.addOpenClose($restaurantTime); // checks if restaurant open and insert paragraph (open/closed)
                     }
+                    //for weekend 
+                    else {
+                            $('.amica__top-center__restaurant-info__isOpen').text('CLOSED!');
+                        }
                 });
             }).catch(function (error) {
                 console.log(error);
@@ -250,8 +282,9 @@ $(function () {
                     //creates columns by size (12-6-3)
                     var $column = amicaAPI.addLunchInfo(today);
                     $row.append($column);
-                    $amica.container.append($row);
                 });
+
+                $amica.container.append($row);
 
                 //remove the attritube that came from Amica API
                 $('.amica td').removeAttr('width valign');
@@ -267,32 +300,48 @@ $(function () {
         var amicaReturnButtonClicked = function amicaReturnButtonClicked(event) {
             event.preventDefault();
 
-            $amica.container.removeClass('amica--width-100 amica--relative').addClass('amica--width-50');
+            var isMobile = getPhoneScreen('529px');
+
+            if (isMobile) {
+                $amica.container.attr('class', 'amica amica--height-50');
+                $haaga.container.attr('class', 'haaga haaga--height-50');
+            } else {
+                $amica.container.attr('class', 'amica amica--width-50');
+                $haaga.container.attr('class', 'haaga haaga--width-50');
+            }
+
             var $amica__top_center = $('.amica__top-center'),
                 $amica__top_center__logo = $('.amica__top-center__logo');
 
             $amica__top_center.removeClass('amica__top-center').addClass('amica__center-center');
-            $amica__top_center__logo.removeClass('amica__top-center__logo').addClass('amica__center_center__logo');
-
-            $haaga.container.removeClass('haaga--width-0').addClass('haaga--width-50');
+            $amica__top_center__logo.removeClass('amica__top-center__logo').addClass('amica__center-center__logo');
 
             $('.footer').remove();
             $('.row').remove();
             $('.amica__top-center__restaurant-info').remove();
 
             buttons.$amicaHome.fadeIn(0);
+            $haaga.center.fadeIn(0);
         };
 
         var haagaHomeButtonClicked = function haagaHomeButtonClicked(event) {
             event.preventDefault();
 
-            $amica.container.removeClass('amica--width-50').addClass('amica--width-0');
-            $haaga.container.removeClass('haaga--width-50').addClass('haaga--width-100 haaga--relative');
+            var isMobile = getPhoneScreen('529px');
+
+            if (isMobile) {
+                $amica.container.attr('class', 'amica amica--height-0');
+                $haaga.container.attr('class', 'haaga haaga--height-100 haaga--relative');
+            } else {
+                $amica.container.attr('class', 'amica amica--width-0');
+                $haaga.container.attr('class', 'haaga haaga--width-100 haaga--relative');
+            }
 
             $haaga.center.removeClass('haaga__center-center').addClass('haaga__top-center');
             $haaga.center_logo.removeClass('haaga__center-center__logo').addClass('haaga__top-center__logo');
 
             buttons.$haagaHome.fadeOut(0);
+            $amica.center.fadeOut(0);
 
             haagaFlickrAPI.getPhotos().then(function (response) {
                 var $row = insertRow();
@@ -308,19 +357,27 @@ $(function () {
         var haagaReturnButtonClicked = function haagaReturnButtonClicked(event) {
             event.preventDefault();
 
-            $haaga.container.removeClass('haaga--width-100 haaga--relative').addClass('haaga--width-50');
+            var isMobile = getPhoneScreen('529px');
+
+            if (isMobile) {
+                $amica.container.attr('class', 'amica amica--height-50');
+                $haaga.container.attr('class', 'haaga haaga--height-50');
+            } else {
+                $amica.container.attr('class', 'amica amica--width-50');
+                $haaga.container.attr('class', 'haaga haaga--width-50');
+            }
+
             var $haaga__top_center = $('.haaga__top-center'),
                 $haaga__top_center__logo = $('.haaga__top-center__logo');
 
             $haaga__top_center.removeClass('haaga__top-center').addClass('haaga__center-center');
-            $haaga__top_center__logo.removeClass('haaga__top-center__logo').addClass('haaga__center_center__logo');
-
-            $amica.container.removeClass('amica--width-0').addClass('amica--width-50');
+            $haaga__top_center__logo.removeClass('haaga__top-center__logo').addClass('haaga__center-center__logo');
 
             $('.footer').remove();
             $('.row').remove();
 
             buttons.$haagaHome.fadeIn(0);
+            $amica.center.fadeIn(0);
         };
 
         return {
