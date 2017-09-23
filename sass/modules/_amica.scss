@@ -54,6 +54,9 @@
             &__logo {
                 width: 80%;
             }
+            &__name a {
+                @include title($amica-title-color);
+            }
         }
     }
     @include atMedium {
@@ -85,16 +88,12 @@
             width: 300px !important;
         }
         &__restaurant-info {
-            font-size: 0.75rem;
-            line-height: 1.3rem;
-            &__name {
-                font-size: 1.2rem;
-            }
-            &__link a {
-                text-decoration: none;
+            &__name a {
+                @include title($amica-title-color);
             }
             &__isOpen {
                 font-weight: 700;
+                font-size: 0.85rem;
             }
         }
     }

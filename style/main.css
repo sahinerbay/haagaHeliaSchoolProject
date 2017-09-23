@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -38,7 +39,7 @@ table {
 body {
   font-size: 62.5%;
   line-height: 1.5;
-  font-family: "OpenSansBold", sans-serif; }
+  font-family: "Roboto", sans-serif; }
 
 * {
   -webkit-box-sizing: border-box;
@@ -48,12 +49,6 @@ body {
   position: relative;
   height: 100%;
   width: 100%; }
-
-.hide {
-  display: none; }
-
-.show {
-  display: block; }
 
 .amica {
   position: fixed;
@@ -146,7 +141,16 @@ body {
         .amica__center-center__button {
           padding: 15px 40px; }
         .amica__center-center__logo {
-          width: 80%; } }
+          width: 80%; }
+        .amica__center-center__name a {
+          font-size: 2rem;
+          line-height: 1.5;
+          letter-spacing: .3rem;
+          color: rgba(39, 101, 77, 0.94);
+          text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+          text-decoration: none; }
+          .amica__center-center__name a:visited {
+            color: rgba(39, 101, 77, 0.94); } }
   @media (min-width: 800px) {
     .amica__center-center {
       position: absolute;
@@ -176,15 +180,18 @@ body {
     width: 100%; }
     .amica__top-center__logo {
       width: 300px !important; }
-    .amica__top-center__restaurant-info {
-      font-size: 0.75rem;
-      line-height: 1.3rem; }
-      .amica__top-center__restaurant-info__name {
-        font-size: 1.2rem; }
-      .amica__top-center__restaurant-info__link a {
-        text-decoration: none; }
-      .amica__top-center__restaurant-info__isOpen {
-        font-weight: 700; }
+    .amica__top-center__restaurant-info__name a {
+      font-size: 2rem;
+      line-height: 1.5;
+      letter-spacing: .3rem;
+      color: rgba(39, 101, 77, 0.94);
+      text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+      text-decoration: none; }
+      .amica__top-center__restaurant-info__name a:visited {
+        color: rgba(39, 101, 77, 0.94); }
+    .amica__top-center__restaurant-info__isOpen {
+      font-weight: 700;
+      font-size: 0.85rem; }
 
 .haaga {
   position: fixed;
@@ -260,7 +267,9 @@ body {
       top: 0;
       right: 0;
       bottom: 0;
-      height: 100%; }
+      height: 100%;
+      -webkit-box-shadow: -8px 0px 14px -8px #000000;
+      box-shadow: -8px 0px 14px -8px #000000; }
       .haaga--width-0 {
         width: 0; }
       .haaga--width-50 {
@@ -277,7 +286,16 @@ body {
         .haaga__center-center__button {
           padding: 15px 40px; }
         .haaga__center-center__logo {
-          width: 80%; } }
+          width: 80%; }
+        .haaga__center-center__name a {
+          font-size: 2rem;
+          line-height: 1.5;
+          letter-spacing: .3rem;
+          color: rgba(0, 0, 0, 0.6);
+          text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+          text-decoration: none; }
+          .haaga__center-center__name a:visited {
+            color: rgba(0, 0, 0, 0.6); } }
   @media (min-width: 800px) {
     .haaga__center-center {
       position: absolute;
@@ -387,27 +405,33 @@ body {
     width: 100%; }
     .haaga__top-center__logo {
       width: 300px !important; }
-    .haaga__top-center__restaurant-info {
-      font-size: 0.75rem;
-      line-height: 1.3rem; }
-      .haaga__top-center__restaurant-info__name {
-        font-size: 1.2rem; }
-      .haaga__top-center__restaurant-info__link a {
-        text-decoration: none; }
-      .haaga__top-center__restaurant-info__isOpen {
-        font-weight: 700; }
+    .haaga__top-center__campus-info__name a {
+      font-size: 2rem;
+      line-height: 1.5;
+      letter-spacing: .3rem;
+      color: rgba(0, 0, 0, 0.6);
+      text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+      text-decoration: none; }
+      .haaga__top-center__campus-info__name a:visited {
+        color: rgba(0, 0, 0, 0.6); }
+    .haaga__top-center__campus-info__isOpen {
+      font-weight: 700; }
 
 .row {
   margin: 0 auto;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 10px;
+  margin-bottom: 10px;
   text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
   .row h3 {
     font-size: 1.3rem;
     font-weight: bold; }
@@ -416,8 +440,15 @@ body {
     line-height: 1.7; }
   .row table {
     margin: 0 auto; }
-  .row > div {
-    margin-bottom: 10px; }
+  .row__xs-12 {
+    width: 100%; }
+    .row__xs-12 img {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+      background-color: #fff; }
+      .row__xs-12 img:hover {
+        cursor: pointer; }
   @media (min-width: 530px) {
     .row {
       padding: 30px; }
@@ -431,20 +462,18 @@ body {
     .row {
       padding: 60px; }
       .row__medium-6 {
-        width: 50%;
-        padding-right: 30px; }
+        width: 50%; }
       .row__medium-3 {
-        width: 25%;
-        padding-right: 30px; } }
+        width: 25%; } }
   @media (min-width: 1325px) {
     .row {
       padding: 90px; }
       .row__large-3 {
-        width: 25%;
-        padding-right: 50px; }
+        width: 25%; }
       .row__large-2 {
-        width: 16.6%;
-        padding-right: 50px; } }
+        width: 16.6%; } }
+  .row > div {
+    margin-bottom: 10px; }
 
 .footer {
   text-align: center;
@@ -471,6 +500,7 @@ body {
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
     text-decoration: none;
+    padding: 10px 30px;
     -webkit-transition: display 2s;
     transition: display 2s; }
     .footer__button-amica:hover {
@@ -497,6 +527,15 @@ body {
       z-index: -1;
       -webkit-transition: all 0.3s;
       transition: all 0.3s; }
+    @media (min-width: 530px) {
+      .footer__button-amica {
+        padding: 15px 40px; } }
+    @media (min-width: 800px) {
+      .footer__button-amica {
+        padding: 15px 40px; } }
+    @media (min-width: 1325px) {
+      .footer__button-amica {
+        padding: 15px 40px; } }
   .footer__button-haaga {
     overflow: hidden;
     border: 3px solid #fff;
@@ -515,6 +554,7 @@ body {
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
     text-decoration: none;
+    padding: 10px 30px;
     -webkit-transition: display 2s;
     transition: display 2s; }
     .footer__button-haaga:hover {
@@ -541,3 +581,50 @@ body {
       z-index: -1;
       -webkit-transition: all 0.3s;
       transition: all 0.3s; }
+    @media (min-width: 530px) {
+      .footer__button-haaga {
+        padding: 15px 40px; } }
+    @media (min-width: 800px) {
+      .footer__button-haaga {
+        padding: 15px 40px; } }
+    @media (min-width: 1325px) {
+      .footer__button-haaga {
+        padding: 15px 40px; } }
+
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  background-color: black;
+  /* Fallback color */ }
+  .modal__container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    pointer-events: none; }
+    .modal__container::after {
+      content: "CLOSE";
+      position: fixed;
+      top: -24px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 20px;
+      color: #fff;
+      background-color: #01639e;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px;
+      cursor: pointer;
+      pointer-events: all; }

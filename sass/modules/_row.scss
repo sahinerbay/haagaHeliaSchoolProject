@@ -2,9 +2,11 @@
     margin: 0 auto;
     box-sizing: border-box;
     padding: 10px;
+    margin-bottom: 10px;
     text-align: center;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 
     & h3 {
         font-size: 1.3rem;
@@ -20,8 +22,19 @@
         margin: 0 auto;
     }
 
-    & > div {
-        margin-bottom: 10px;
+    &__xs-12 {
+        width: 100%;
+
+        & img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            background-color: #fff;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
     }
     
     @include atSmall {
@@ -41,12 +54,10 @@
         padding: 60px;
         &__medium-6 {
             width: 50%;
-            padding-right: 30px;
         }
 
         &__medium-3 {
             width: 25%;
-            padding-right: 30px;
         }
     }
 
@@ -54,12 +65,14 @@
         padding: 90px;
         &__large-3 {
             width: 25%;
-            padding-right: 50px;
         } 
         
         &__large-2 {
             width: 16.6%;
-            padding-right: 50px;
         } 
+    }
+
+    & > div {
+        margin-bottom: 10px;
     }
 }

@@ -62,3 +62,16 @@
 @mixin height-100 {
     height: 100% !important;
 }
+
+@mixin title($color) {
+    font-size: 2rem;
+    line-height: 1.5;
+    letter-spacing: .3rem;
+    color: $color;
+    text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
+    text-decoration: none;
+
+    &:visited {
+        color: $color;
+    }
+}

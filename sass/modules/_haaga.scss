@@ -37,6 +37,7 @@
         right: 0;
         bottom: 0;
         height: 100%;
+        box-shadow: -8px 0px 14px -8px #000000;
         &--width-0 {
             @include width-0;
         }
@@ -53,6 +54,9 @@
             }
             &__logo {
                 width: 80%;
+            }
+            &__name a {
+                @include title($haaga-title-color);
             }
         }
     }
@@ -84,14 +88,9 @@
         &__logo {
             width: 300px !important;
         }
-        &__restaurant-info {
-            font-size: 0.75rem;
-            line-height: 1.3rem;
-            &__name {
-                font-size: 1.2rem;
-            }
-            &__link a {
-                text-decoration: none;
+        &__campus-info {
+            &__name a {
+                @include title($haaga-title-color);
             }
             &__isOpen {
                 font-weight: 700;
