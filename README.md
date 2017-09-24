@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 * You need to have node.js and npm installed in order to run this web application.
 
-* If you're using OS X or Windows, the best way to install Node.js is to use one of the installers from the Node.js download page. 
+* If you're using OS X or Windows, the best way to install Node.js is to use one of the installers from the [Node.js download page](https://nodejs.org/en/download/). 
 
     Check if node.js installed correctly;
 
@@ -23,6 +23,8 @@ These instructions will get you a copy of the project up and running on your loc
 ```
 npm install npm@latest -g
 ```
+
+* Add [Allow-Control-Allow-Origin: *](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en) extension on Google Chrome
 
 ### Installing
 
@@ -46,6 +48,12 @@ Run gulpfile.js
 
 ```
 gulp project:watch
+```
+
+Load the following address on any browser
+
+```
+localhost:3000
 ```
 
 ## Built With

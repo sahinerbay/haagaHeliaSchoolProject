@@ -119,6 +119,15 @@ body {
         transition: all 0.3s; }
     .amica__center-center__logo {
       width: 80%; }
+    .amica__center-center__name a {
+      font-size: 2rem;
+      line-height: 1.5;
+      letter-spacing: .3rem;
+      color: rgba(39, 101, 77, 0.94);
+      text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+      text-decoration: none; }
+      .amica__center-center__name a:visited {
+        color: rgba(39, 101, 77, 0.94); }
   @media (min-width: 530px) {
     .amica {
       top: 0;
@@ -262,6 +271,15 @@ body {
         transition: all 0.3s; }
     .haaga__center-center__logo {
       width: 80%; }
+    .haaga__center-center__name a {
+      font-size: 2rem;
+      line-height: 1.5;
+      letter-spacing: .3rem;
+      color: rgba(0, 0, 0, 0.6);
+      text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+      text-decoration: none; }
+      .haaga__center-center__name a:visited {
+        color: rgba(0, 0, 0, 0.6); }
   @media (min-width: 530px) {
     .haaga {
       top: 0;

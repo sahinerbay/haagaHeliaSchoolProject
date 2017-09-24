@@ -31,6 +31,9 @@
         &__logo {
             width: 80%;
         }
+        &__name a {
+            @include title($amica-title-color);
+        }
     }
     @include atSmall {
         top: 0;
