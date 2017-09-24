@@ -44,7 +44,7 @@ gulp.task("babel", function () {
     .pipe(gulp.dest("./script/"));
 });
 
-gulp.task('sass:watch', function () {
+gulp.task('project:watch', function () {
 
   browserSync.init({
     server: {
