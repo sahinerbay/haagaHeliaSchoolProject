@@ -98,10 +98,10 @@ $(function () {
         let isMobile = getPhoneScreen('529px');
 
         if (isMobile) {
-            onPageSelector.attr('class', `${onPage} ${onPage}--height-100 ${onPage}--relative`);
+            onPageSelector.attr('class', `${onPage} ${onPage}--height-100 ${onPage}--overflow`);
             offPageSelector.attr('class', `${offPage} ${offPage}--height-0`);
         } else {
-            onPageSelector.attr('class', `${onPage} ${onPage}--width-100 ${onPage}--relative`);
+            onPageSelector.attr('class', `${onPage} ${onPage}--width-100 ${onPage}--overflow`);
             offPageSelector.attr('class', `${offPage} ${offPage}--width-0`);
         }
     };
@@ -271,12 +271,14 @@ $(function () {
             tags: 'haaga-helia',
             format: 'json',
             perPage: 50,
+            page: 1,
             plainJSON: 'nojsoncallback=1'
         };
 
-        const apiURL = `https://api.flickr.com/services/rest/?method=${options.method}&api_key=${options.api_key}&tags=${options.tags}&per_page=${options.perPage}&format=${options.format}&${options.plainJSON}`;
+
 
         let getPhotos = () => {
+            const apiURL = `https://api.flickr.com/services/rest/?method=${options.method}&api_key=${options.api_key}&tags=${options.tags}&per_page=${options.perPage}&page=${options.page}&format=${options.format}&${options.plainJSON}`;
             return axios.get(apiURL)
                 .then(function (response) {
                     return response.data;
@@ -314,13 +316,30 @@ $(function () {
         };
 
         let removePopUp = (e) => {
-            console.log(e.target)
             let modal = $('.modal');
             if (event.target == modal) {
                 modal.css('display', 'none');
             }
             $(e.target).closest(".modal").css('display', 'none');
-        }
+        };
+
+        let infiniteLoading = () => {
+            let $win = $(window);
+            // End of the document reached?
+            if ($(document).height() - $win.height() == Math.ceil($win.scrollTop())) {
+                
+                options.page += 1;
+                getPhotos()
+                    .then(response => {
+                        let $row = $('.row');
+    
+                        response.photos.photo.forEach(element => {
+                            let url = buildThumbnailUrl(element);
+                            $row.append(addContent(url));
+                        });
+                    });
+            }
+        };
 
         return {
             getPhotos: getPhotos,
@@ -328,7 +347,8 @@ $(function () {
             addContent: addContent,
             addHaagaInfo: addHaagaInfo,
             createPopUp: createPopUp,
-            removePopUp: removePopUp
+            removePopUp: removePopUp,
+            infiniteLoading: infiniteLoading
         }
     }();
 
@@ -432,6 +452,7 @@ $(function () {
             haagaFlickrAPI.getPhotos()
                 .then(response => {
                     let $row = insertRow();
+
                     response.photos.photo.forEach(element => {
                         let url = haagaFlickrAPI.buildThumbnailUrl(element);
                         $row.append(haagaFlickrAPI.addContent(url));
@@ -440,8 +461,8 @@ $(function () {
 
                     $row.on('click', haagaFlickrAPI.createPopUp);
                     //set display none for pseudo element of .modal__container by using pointer:none css property
-                    $(".modal__container").on('click', haagaFlickrAPI.removePopUp);
-                    $('.modal').on('click', haagaFlickrAPI.removePopUp)
+                    $row.on('click', '.modal__container', haagaFlickrAPI.removePopUp);
+                    $row.on('click', '.modal', haagaFlickrAPI.removePopUp)
 
                     addReturnButton('haaga');
                 });
@@ -481,6 +502,8 @@ $(function () {
     $amica.container.on('click', '.footer__button-amica', buttonsCB.amicaReturnButton);
     $haaga.container.on('click', '.footer__button-haaga', buttonsCB.haagaReturnButton);
 
-    window.addEventListener("orientationchange", adjustScreenAngle, false);
-
+    $(window).on({
+        "orientationchange" : adjustScreenAngle,
+        "scroll": haagaFlickrAPI.infiniteLoading
+    });
 });

@@ -19,8 +19,8 @@
         @include height-100;
     }
     
-    &--relative {
-        position: relative;
+    &--overflow {
+        position: overflow;
     }
     &__center-center {
         @include center;
