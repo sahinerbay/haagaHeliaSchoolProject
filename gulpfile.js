@@ -41,7 +41,10 @@ gulp.task("babel", function () {
     .pipe(rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest("./script/"));
+    .pipe(gulp.dest("./script/"))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 });
 
 gulp.task('project:watch', function () {

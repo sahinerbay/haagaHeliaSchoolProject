@@ -4,38 +4,35 @@
     transform: translate(-50%, -50%);
     text-align: center;
     position: relative;
-    
+    &__loading {
+        width: 50px;
+        display: block;
+        margin: 0 auto;
+    }
     &__button-amica {
         @include buttonAtHomePage($button-amica-hover-color, $button-amica-text-color, $button-amica-border-color, $button-amica-hover-backgrond-color);
         padding: 10px 30px;
         transition: display 2s;
-
         @include atSmall {
             padding: 15px 40px;
         }
-
         @include atMedium {
             padding: 15px 40px;
         }
-
         @include atLarge {
             padding: 15px 40px;
         }
     }
-
     &__button-haaga {
         @include buttonAtHomePage($button-haaga-hover-color, $button-haaga-text-color, $button-haaga-border-color, $button-haaga-hover-background-color);
         padding: 10px 30px;
         transition: display 2s;
-
         @include atSmall {
             padding: 15px 40px;
         }
-
         @include atMedium {
             padding: 15px 40px;
         }
-
         @include atLarge {
             padding: 15px 40px;
         }

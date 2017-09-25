@@ -40,8 +40,6 @@ And install Gulp.js globally
 npm install -g gulp
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
 ## Deployment
 
 Run gulpfile.js

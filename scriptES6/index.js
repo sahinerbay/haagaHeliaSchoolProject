@@ -70,10 +70,11 @@ $(function () {
     //adds 'back to home' button
     let addReturnButton = (element) => {
         let $footer = $(`
-        <div class = 'footer'>
+            <div class = 'footer'>
+                <img class='footer__loading' src="../image/loading_icon.gif" alt="Loading…" />
                 <a class = 'footer__button-${element}'>Go Back</a>    
-        </div>
-    `);
+            </div>
+        `);
         $(`.${element}`).append($footer);
     };
 
@@ -271,23 +272,40 @@ $(function () {
             tags: 'haaga-helia',
             format: 'json',
             perPage: 50,
-            page: 1,
-            plainJSON: 'nojsoncallback=1'
+            currentPage: 1,
+            plainJSON: 'nojsoncallback=1',
         };
 
-
+        let createApiUrl = () => {
+            return `https://api.flickr.com/services/rest/?method=${options.method}&api_key=${options.api_key}&tags=${options.tags}&per_page=${options.perPage}&page=${options.currentPage}&format=${options.format}&${options.plainJSON}`;
+        }
 
         let getPhotos = () => {
-            const apiURL = `https://api.flickr.com/services/rest/?method=${options.method}&api_key=${options.api_key}&tags=${options.tags}&per_page=${options.perPage}&page=${options.page}&format=${options.format}&${options.plainJSON}`;
-            return axios.get(apiURL)
+            options.currentPage = 1;
+            let apiUrl = createApiUrl();            
+            return axios.get(apiUrl)
+                .then(function (response) {
+                    options.totalPages = response.data.photos.pages;
+                    return response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        };
+
+        let loadMorePhotos = () => {
+            options.currentPage += 1;
+            let apiUrl = createApiUrl();  
+            return axios.get(apiUrl)
                 .then(function (response) {
                     return response.data;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-        }
+        };
 
+    
         let buildThumbnailUrl = (photo) => {
             return `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_q.jpg`;
         };
@@ -326,17 +344,20 @@ $(function () {
         let infiniteLoading = () => {
             let $win = $(window);
             // End of the document reached?
-            if ($(document).height() - $win.height() == Math.ceil($win.scrollTop())) {
-                
-                options.page += 1;
-                getPhotos()
+            if ($(document).height() - $win.height() == $win.scrollTop() && options.currentPage <= options.totalPages) {
+                $('.footer__loading').css('visibility', 'visible');
+                loadMorePhotos()
                     .then(response => {
                         let $row = $('.row');
-    
+
                         response.photos.photo.forEach(element => {
                             let url = buildThumbnailUrl(element);
                             $row.append(addContent(url));
                         });
+                        $('.footer__loading').css('visibility', 'hidden');
+                        if(options.currentPage == options.totalPages) {
+                            console.log(response)
+                        }
                     });
             }
         };
@@ -465,6 +486,7 @@ $(function () {
                     $row.on('click', '.modal', haagaFlickrAPI.removePopUp)
 
                     addReturnButton('haaga');
+                    $('.footer').find('.footer__loading').css('visibility', 'hidden');
                 });
         };
 
@@ -503,7 +525,7 @@ $(function () {
     $haaga.container.on('click', '.footer__button-haaga', buttonsCB.haagaReturnButton);
 
     $(window).on({
-        "orientationchange" : adjustScreenAngle,
+        "orientationchange": adjustScreenAngle,
         "scroll": haagaFlickrAPI.infiniteLoading
     });
 });

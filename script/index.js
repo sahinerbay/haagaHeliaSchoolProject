@@ -54,7 +54,7 @@ $(function () {
 
     //adds 'back to home' button
     var addReturnButton = function addReturnButton(element) {
-        var $footer = $('\n        <div class = \'footer\'>\n                <a class = \'footer__button-' + element + '\'>Go Back</a>    \n        </div>\n    ');
+        var $footer = $('\n            <div class = \'footer\'>\n                <img class=\'footer__loading\' src="../image/loading_icon.gif" alt="Loading\u2026" />\n                <a class = \'footer__button-' + element + '\'>Go Back</a>    \n            </div>\n        ');
         $('.' + element).append($footer);
     };
 
@@ -246,13 +246,29 @@ $(function () {
             tags: 'haaga-helia',
             format: 'json',
             perPage: 50,
-            page: 1,
+            currentPage: 1,
             plainJSON: 'nojsoncallback=1'
         };
 
+        var createApiUrl = function createApiUrl() {
+            return 'https://api.flickr.com/services/rest/?method=' + options.method + '&api_key=' + options.api_key + '&tags=' + options.tags + '&per_page=' + options.perPage + '&page=' + options.currentPage + '&format=' + options.format + '&' + options.plainJSON;
+        };
+
         var getPhotos = function getPhotos() {
-            var apiURL = 'https://api.flickr.com/services/rest/?method=' + options.method + '&api_key=' + options.api_key + '&tags=' + options.tags + '&per_page=' + options.perPage + '&page=' + options.page + '&format=' + options.format + '&' + options.plainJSON;
-            return axios.get(apiURL).then(function (response) {
+            options.currentPage = 1;
+            var apiUrl = createApiUrl();
+            return axios.get(apiUrl).then(function (response) {
+                options.totalPages = response.data.photos.pages;
+                return response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        };
+
+        var loadMorePhotos = function loadMorePhotos() {
+            options.currentPage += 1;
+            var apiUrl = createApiUrl();
+            return axios.get(apiUrl).then(function (response) {
                 return response.data;
             }).catch(function (error) {
                 console.log(error);
@@ -287,16 +303,19 @@ $(function () {
         var infiniteLoading = function infiniteLoading() {
             var $win = $(window);
             // End of the document reached?
-            if ($(document).height() - $win.height() == Math.ceil($win.scrollTop())) {
-
-                options.page += 1;
-                getPhotos().then(function (response) {
+            if ($(document).height() - $win.height() == $win.scrollTop() && options.currentPage <= options.totalPages) {
+                $('.footer__loading').css('visibility', 'visible');
+                loadMorePhotos().then(function (response) {
                     var $row = $('.row');
 
                     response.photos.photo.forEach(function (element) {
                         var url = buildThumbnailUrl(element);
                         $row.append(addContent(url));
                     });
+                    $('.footer__loading').css('visibility', 'hidden');
+                    if (options.currentPage == options.totalPages) {
+                        console.log(response);
+                    }
                 });
             }
         };
@@ -422,6 +441,7 @@ $(function () {
                 $row.on('click', '.modal', haagaFlickrAPI.removePopUp);
 
                 addReturnButton('haaga');
+                $('.footer').find('.footer__loading').css('visibility', 'hidden');
             });
         };
 

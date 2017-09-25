@@ -20,7 +20,7 @@
     }
     
     &--overflow {
-        position: overflow;
+        overflow: auto;
     }
     &__center-center {
         @include center;
