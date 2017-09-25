@@ -5,9 +5,13 @@
     text-align: center;
     position: relative;
     &__loading {
-        width: 50px;
+        width: 60px;
         display: block;
         margin: 0 auto;
+    }
+    &__info {
+        color: #fff;
+        font-size: 1.2rem;
     }
     &__button-amica {
         @include buttonAtHomePage($button-amica-hover-color, $button-amica-text-color, $button-amica-border-color, $button-amica-hover-backgrond-color);

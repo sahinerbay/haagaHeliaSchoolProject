@@ -94,6 +94,10 @@
             &__name a {
                 @include title($amica-title-color);
             }
+            &__time {
+                font-size: .75rem;
+                letter-spacing: .1rem;
+            }
             &__isOpen {
                 font-weight: 700;
                 font-size: 0.85rem;

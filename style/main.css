@@ -198,6 +198,9 @@ body {
       text-decoration: none; }
       .amica__top-center__restaurant-info__name a:visited {
         color: rgba(39, 101, 77, 0.94); }
+    .amica__top-center__restaurant-info__time {
+      font-size: .75rem;
+      letter-spacing: .1rem; }
     .amica__top-center__restaurant-info__isOpen {
       font-weight: 700;
       font-size: 0.85rem; }
@@ -447,10 +450,7 @@ body {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between; }
+  flex-wrap: wrap; }
   .row h3 {
     font-size: 1.3rem;
     font-weight: bold; }
@@ -502,9 +502,12 @@ body {
   text-align: center;
   position: relative; }
   .footer__loading {
-    width: 50px;
+    width: 60px;
     display: block;
     margin: 0 auto; }
+  .footer__info {
+    color: #fff;
+    font-size: 1.2rem; }
   .footer__button-amica {
     overflow: hidden;
     border: 3px solid #007549;

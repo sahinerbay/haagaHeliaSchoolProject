@@ -54,7 +54,12 @@ $(function () {
 
     //adds 'back to home' button
     var addReturnButton = function addReturnButton(element) {
-        var $footer = $('\n            <div class = \'footer\'>\n                <img class=\'footer__loading\' src="../image/loading_icon.gif" alt="Loading\u2026" />\n                <a class = \'footer__button-' + element + '\'>Go Back</a>    \n            </div>\n        ');
+        var $loadingIcon = void 0;
+        if (element == 'haaga') {
+            $loadingIcon = "<img class='footer__loading' src='../image/loading_icon.gif' alt='Loading…' />";
+        } else $loadingIcon = "";
+
+        var $footer = $('\n            <div class = \'footer\'>\n                ' + $loadingIcon + '\n                <a class = \'footer__button-' + element + '\'>Go Back</a>    \n            </div>\n        ');
         $('.' + element).append($footer);
     };
 
@@ -245,7 +250,7 @@ $(function () {
             api_key: apiKey,
             tags: 'haaga-helia',
             format: 'json',
-            perPage: 50,
+            perPage: 30,
             currentPage: 1,
             plainJSON: 'nojsoncallback=1'
         };
@@ -303,7 +308,7 @@ $(function () {
         var infiniteLoading = function infiniteLoading() {
             var $win = $(window);
             // End of the document reached?
-            if ($(document).height() - $win.height() == $win.scrollTop() && options.currentPage <= options.totalPages) {
+            if ($(document).height() - $win.height() == Math.ceil($win.scrollTop()) && options.currentPage < options.totalPages) {
                 $('.footer__loading').css('visibility', 'visible');
                 loadMorePhotos().then(function (response) {
                     var $row = $('.row');
@@ -314,7 +319,7 @@ $(function () {
                     });
                     $('.footer__loading').css('visibility', 'hidden');
                     if (options.currentPage == options.totalPages) {
-                        console.log(response);
+                        $('.footer').prepend('<p class=\'footer__info\'>' + response.photos.total + ' photos loaded.</p>');
                     }
                 });
             }

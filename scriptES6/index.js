@@ -69,9 +69,14 @@ $(function () {
 
     //adds 'back to home' button
     let addReturnButton = (element) => {
+        let $loadingIcon;
+        if(element == 'haaga') {
+            $loadingIcon = "<img class='footer__loading' src='../image/loading_icon.gif' alt='Loading…' />";
+        } else $loadingIcon = "";
+
         let $footer = $(`
             <div class = 'footer'>
-                <img class='footer__loading' src="../image/loading_icon.gif" alt="Loading…" />
+                ${$loadingIcon}
                 <a class = 'footer__button-${element}'>Go Back</a>    
             </div>
         `);
@@ -271,7 +276,7 @@ $(function () {
             api_key: apiKey,
             tags: 'haaga-helia',
             format: 'json',
-            perPage: 50,
+            perPage: 30,
             currentPage: 1,
             plainJSON: 'nojsoncallback=1',
         };
@@ -344,7 +349,7 @@ $(function () {
         let infiniteLoading = () => {
             let $win = $(window);
             // End of the document reached?
-            if ($(document).height() - $win.height() == $win.scrollTop() && options.currentPage <= options.totalPages) {
+            if ($(document).height() - $win.height() == Math.ceil($win.scrollTop()) && options.currentPage < options.totalPages) {
                 $('.footer__loading').css('visibility', 'visible');
                 loadMorePhotos()
                     .then(response => {
@@ -356,7 +361,7 @@ $(function () {
                         });
                         $('.footer__loading').css('visibility', 'hidden');
                         if(options.currentPage == options.totalPages) {
-                            console.log(response)
+                            $('.footer').prepend(`<p class='footer__info'>${response.photos.total} photos loaded.</p>`);
                         }
                     });
             }
