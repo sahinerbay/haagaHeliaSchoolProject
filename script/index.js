@@ -346,9 +346,7 @@ $(function () {
             $amica.center.removeClass('amica__center-center').addClass('amica__top-center');
             $amica.center_logo.removeClass('amica__center-center__logo').addClass('amica__top-center__logo');
 
-            buttons.$amicaHome.fadeOut(0);
-            $haaga.center.fadeOut(0);
-            $amica.center_name.fadeOut(0);
+            buttons.$amicaHome.add($haaga.center).add($amica.center_name).fadeOut(0);
 
             amicaAPI.getRestaurantInfo().then(function (restaurant) {
                 var $amica__top_center__restaurant_info = amicaAPI.addRestaurantInfo(restaurant);
@@ -407,13 +405,9 @@ $(function () {
             $amica__top_center.removeClass('amica__top-center').addClass('amica__center-center');
             $amica__top_center__logo.removeClass('amica__top-center__logo').addClass('amica__center-center__logo');
 
-            $('.footer').remove();
-            $('.row').remove();
-            $('.amica__top-center__restaurant-info').remove();
+            $('.footer, .row, .amica__top-center__restaurant-info').remove();
 
-            buttons.$amicaHome.fadeIn(0);
-            $haaga.center.fadeIn(0);
-            $amica.center_name.fadeIn(0);
+            buttons.$amicaHome.add($haaga.center).add($amica.center_name).fadeIn(0);
         };
 
         var haagaHomeButtonClicked = function haagaHomeButtonClicked(event) {
@@ -427,9 +421,7 @@ $(function () {
             var $haaga__top_center__campus_info = haagaFlickrAPI.addHaagaInfo();
             $(".haaga__top-center").append($haaga__top_center__campus_info);
 
-            buttons.$haagaHome.fadeOut(0);
-            $amica.center.fadeOut(0);
-            $haaga.center_name.fadeOut(0);
+            buttons.$haagaHome.add($amica.center).add($haaga.center_name).fadeOut(0);
 
             haagaFlickrAPI.getPhotos().then(function (response) {
                 var $row = insertRow();
@@ -461,13 +453,9 @@ $(function () {
             $haaga__top_center.removeClass('haaga__top-center').addClass('haaga__center-center');
             $haaga__top_center__logo.removeClass('haaga__top-center__logo').addClass('haaga__center-center__logo');
 
-            $('.footer').remove();
-            $('.row').remove();
-            $('.haaga__top-center__campus-info').remove();
+            $('.footer, .row, .haaga__top-center__campus-info').remove();
 
-            buttons.$haagaHome.fadeIn(0);
-            $amica.center.fadeIn(0);
-            $haaga.center_name.fadeIn(0);
+            buttons.$haagaHome.add($amica.center).add($haaga.center_name).fadeIn(0);
         };
 
         return {
