@@ -20,9 +20,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 * Node comes with npm installed so you should have a version of npm. However, npm gets updated more frequently than Node does, so you'll want to make sure it's the latest version.
 
-```
-npm install npm@latest -g
-```
+    ```
+    npm install npm@latest -g
+    ```
 
 * Add [Allow-Control-Allow-Origin: *](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en) extension on Google Chrome
 
