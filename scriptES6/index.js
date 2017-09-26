@@ -75,7 +75,7 @@ $(function () {
     let addReturnButton = (element) => {
         let $loadingIcon;
         if (element == 'haaga') {
-            $loadingIcon = "<img class='footer__loading' src='../image/loading_icon.gif' alt='Loading…' />";
+            $loadingIcon = "<img class='footer__loading' src='./image/loading_icon.gif' alt='Loading…' />";
         } else $loadingIcon = "";
 
         let $footer = $(`
