@@ -21,8 +21,12 @@
 
     &--overflow {
         overflow: auto;
+    }
+
+    &--relative {
         position: relative;
     }
+
     &__center-center {
         @include center;
         &__button {

@@ -217,6 +217,7 @@ $(function () {
                 $el = $('<p class = "amica__top-center__restaurant-info__isOpen"></p>'),
                 open = 'OPEN!',
                 closed = 'CLOSED!';
+
             //10:30am-2.00pm and 4:00pm-6:00pm
             if (hours == 10) {
                 if (minutes >= 30 && minutes <= 59) {
@@ -227,6 +228,7 @@ $(function () {
             } else if (hours >= 16 && hours < 18) {
                 $el.text(open);
             } else $el.text(closed);
+
             $el.insertAfter(insertAfterEl);
         };
 
@@ -356,18 +358,24 @@ $(function () {
                 var $restaurantTime = $('.amica__top-center__restaurant-info__time');
 
                 //loops through each day of the week
-                restaurant.MenusForDays.forEach(function (element, index) {
-                    //for weekdays
-                    if (element.Date.search(todaysDate) != -1) {
-                        // search today's meal
-                        $restaurantTime.text(element.LunchTime); // show today's meal
-                        amicaAPI.addOpenClose($restaurantTime); // checks if restaurant open and insert paragraph (open/closed)
-                    }
-                    //for weekend 
-                    else {
-                            $('.amica__top-center__restaurant-info__isOpen').text('CLOSED!');
+                //throw exception when the date is found!
+                try {
+                    restaurant.MenusForDays.forEach(function (element, index) {
+                        //for weekdays
+                        if (element.Date.search(todaysDate) != -1) {
+                            // search today's meal
+                            $restaurantTime.text(element.LunchTime); // show today's meal
+                            amicaAPI.addOpenClose($restaurantTime); // checks if restaurant open and insert paragraph (open/closed)
+                            throw BreakException;
                         }
-                });
+                        //for weekend 
+                        else {
+                                $('.amica__top-center__restaurant-info__isOpen').text('CLOSED!');
+                            }
+                    });
+                } catch (e) {
+                    if (e !== BreakException) throw e;
+                }
             }).catch(function (error) {
                 console.log(error);
             });
@@ -439,6 +447,7 @@ $(function () {
 
                 addReturnButton('haaga');
                 $('.footer').find('.footer__loading').css('visibility', 'hidden');
+                $('.haaga').addClass('haaga--relative');
             });
         };
 
@@ -446,6 +455,8 @@ $(function () {
             event.preventDefault();
 
             setClassesToHome('haaga', $haaga.container, 'amica', $amica.container);
+
+            $('.haaga').removeClass('haaga--relative');
 
             var $haaga__top_center = $('.haaga__top-center'),
                 $haaga__top_center__logo = $('.haaga__top-center__logo');

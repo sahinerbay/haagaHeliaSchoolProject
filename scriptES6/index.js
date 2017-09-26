@@ -70,7 +70,7 @@ $(function () {
     //adds 'back to home' button
     let addReturnButton = (element) => {
         let $loadingIcon;
-        if(element == 'haaga') {
+        if (element == 'haaga') {
             $loadingIcon = "<img class='footer__loading' src='../image/loading_icon.gif' alt='Loading…' />";
         } else $loadingIcon = "";
 
@@ -243,6 +243,7 @@ $(function () {
                 $el = $('<p class = "amica__top-center__restaurant-info__isOpen"></p>'),
                 open = 'OPEN!',
                 closed = 'CLOSED!';
+
             //10:30am-2.00pm and 4:00pm-6:00pm
             if (hours == 10) {
                 if ((minutes >= 30 && minutes <= 59)) {
@@ -253,6 +254,7 @@ $(function () {
             } else if (hours >= 16 && hours < 18) {
                 $el.text(open);
             } else $el.text(closed);
+
             $el.insertAfter(insertAfterEl);
         };
 
@@ -287,7 +289,7 @@ $(function () {
 
         let getPhotos = () => {
             options.currentPage = 1;
-            let apiUrl = createApiUrl();            
+            let apiUrl = createApiUrl();
             return axios.get(apiUrl)
                 .then(function (response) {
                     options.totalPages = response.data.photos.pages;
@@ -300,7 +302,7 @@ $(function () {
 
         let loadMorePhotos = () => {
             options.currentPage += 1;
-            let apiUrl = createApiUrl();  
+            let apiUrl = createApiUrl();
             return axios.get(apiUrl)
                 .then(function (response) {
                     return response.data;
@@ -310,7 +312,7 @@ $(function () {
                 });
         };
 
-    
+
         let buildThumbnailUrl = (photo) => {
             return `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_q.jpg`;
         };
@@ -360,7 +362,7 @@ $(function () {
                             $row.append(addContent(url));
                         });
                         $('.footer__loading').css('visibility', 'hidden');
-                        if(options.currentPage == options.totalPages) {
+                        if (options.currentPage == options.totalPages) {
                             $('.footer').prepend(`<p class='footer__info'>${response.photos.total} photos loaded.</p>`);
                         }
                     });
@@ -399,17 +401,23 @@ $(function () {
                     let $restaurantTime = $('.amica__top-center__restaurant-info__time');
 
                     //loops through each day of the week
-                    restaurant.MenusForDays.forEach((element, index) => {
-                        //for weekdays
-                        if (element.Date.search(todaysDate) != -1) { // search today's meal
-                            $restaurantTime.text(element.LunchTime); // show today's meal
-                            amicaAPI.addOpenClose($restaurantTime); // checks if restaurant open and insert paragraph (open/closed)
-                        }
-                        //for weekend 
-                        else {
-                            $('.amica__top-center__restaurant-info__isOpen').text('CLOSED!');
-                        }
-                    });
+                    //throw exception when the date is found!
+                    try {
+                        restaurant.MenusForDays.forEach((element, index) => {
+                            //for weekdays
+                            if (element.Date.search(todaysDate) != -1) { // search today's meal
+                                $restaurantTime.text(element.LunchTime); // show today's meal
+                                amicaAPI.addOpenClose($restaurantTime); // checks if restaurant open and insert paragraph (open/closed)
+                                throw BreakException;
+                            }
+                            //for weekend 
+                            else {
+                                $('.amica__top-center__restaurant-info__isOpen').text('CLOSED!');
+                            }
+                        });
+                    } catch (e) {
+                        if (e !== BreakException) throw e;
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -484,6 +492,7 @@ $(function () {
 
                     addReturnButton('haaga');
                     $('.footer').find('.footer__loading').css('visibility', 'hidden');
+                    $('.haaga').addClass('haaga--relative');
                 });
         };
 
@@ -491,6 +500,8 @@ $(function () {
             event.preventDefault();
 
             setClassesToHome('haaga', $haaga.container, 'amica', $amica.container);
+
+            $('.haaga').removeClass('haaga--relative');
 
             let $haaga__top_center = $('.haaga__top-center'),
                 $haaga__top_center__logo = $('.haaga__top-center__logo');

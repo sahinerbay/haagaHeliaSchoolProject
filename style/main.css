@@ -221,7 +221,8 @@ body {
   .haaga--height-100 {
     height: 100% !important; }
   .haaga--overflow {
-    overflow: auto;
+    overflow: auto; }
+  .haaga--relative {
     position: relative; }
   .haaga__center-center {
     position: absolute;
