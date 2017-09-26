@@ -11,17 +11,17 @@ $(function () {
 
     //Adding core html for homepage
     var init = function (size) {
-        var $container = $('.container'),
+        var $body = $('body'),
             classAttr = void 0;
 
         if (size) classAttr = 'height';else classAttr = 'width';
 
         var amica = function amica() {
-            $container.append('\n                <div class="amica amica--' + classAttr + '-50">\n                    <div class="amica__center-center">\n                        <img class="amica__center-center__logo" src="./image/amica-brand-logo.png" alt="amica logo">\n                        <a href="" class="amica__center-center__button" title="Check Amica Lunch Options">Enter</a>\n                        <h1 class="amica__center-center__name"><a href=\'http://www.amica.fi/en/restaurants/ravintolat-kaupungeittain/helsinki/helia-bistro.-opetustalo/\' target="_blank">Helia Bistro</a></h1>\n                    </div>\n                </div>\n            ');
+            $body.append('\n            <div class="container">\n                <div class="amica amica--' + classAttr + '-50">\n                    <div class="amica__center-center">\n                        <img class="amica__center-center__logo" src="./image/amica-brand-logo.png" alt="amica logo">\n                        <a href="" class="amica__center-center__button" title="Check Amica Lunch Options">Enter</a>\n                        <h1 class="amica__center-center__name"><a href=\'http://www.amica.fi/en/restaurants/ravintolat-kaupungeittain/helsinki/helia-bistro.-opetustalo/\' target="_blank">Helia Bistro</a></h1>\n                    </div>\n                </div>\n            </div>\n            ');
         };
 
         var haaga = function haaga() {
-            $container.append('\n                <div class="haaga haaga--' + classAttr + '-50">\n                    <div class="haaga__center-center">\n                        <img class="haaga__center-center__logo" src="./image/haaga-helia-logo.png" alt="haaga-helia logo">\n                        <a href="" class="haaga__center-center__button" title="Read More Information About Haaga-Helia">Enter</a>\n                        <h1 class="haaga__center-center__name"><a href=\'http://www.haaga-helia.fi/fi/etusivu\' target="_blank">Haaga Helia</a></h1>\n                    </div>\n                </div>\n            ');
+            $body.append('\n            <div class="container">\n                <div class="haaga haaga--' + classAttr + '-50">\n                    <div class="haaga__center-center">\n                        <img class="haaga__center-center__logo" src="./image/haaga-helia-logo.png" alt="haaga-helia logo">\n                        <a href="" class="haaga__center-center__button" title="Read More Information About Haaga-Helia">Enter</a>\n                        <h1 class="haaga__center-center__name"><a href=\'http://www.haaga-helia.fi/fi/etusivu\' target="_blank">Haaga Helia</a></h1>\n                    </div>\n                </div>\n            </div>\n            ');
         };
 
         return {

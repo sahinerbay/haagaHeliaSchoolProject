@@ -9,14 +9,15 @@ $(function () {
 
     //Adding core html for homepage
     let init = function (size) {
-        let $container = $('.container'),
+        let $body = $('body'),
             classAttr;
 
         if (size) classAttr = 'height';
         else classAttr = 'width';
 
         let amica = () => {
-            $container.append(`
+            $body.append(`
+            <div class="container">
                 <div class="amica amica--${classAttr}-50">
                     <div class="amica__center-center">
                         <img class="amica__center-center__logo" src="./image/amica-brand-logo.png" alt="amica logo">
@@ -24,11 +25,13 @@ $(function () {
                         <h1 class="amica__center-center__name"><a href='http://www.amica.fi/en/restaurants/ravintolat-kaupungeittain/helsinki/helia-bistro.-opetustalo/' target="_blank">Helia Bistro</a></h1>
                     </div>
                 </div>
+            </div>
             `);
         };
 
         let haaga = () => {
-            $container.append(`
+            $body.append(`
+            <div class="container">
                 <div class="haaga haaga--${classAttr}-50">
                     <div class="haaga__center-center">
                         <img class="haaga__center-center__logo" src="./image/haaga-helia-logo.png" alt="haaga-helia logo">
@@ -36,6 +39,7 @@ $(function () {
                         <h1 class="haaga__center-center__name"><a href='http://www.haaga-helia.fi/fi/etusivu' target="_blank">Haaga Helia</a></h1>
                     </div>
                 </div>
+            </div>
             `);
         };
 
