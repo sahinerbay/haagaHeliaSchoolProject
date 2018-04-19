@@ -186,8 +186,9 @@ $(function () {
                         .append(`<div class="error">
                             <h1>Service Unavailable!</h1>
                             <p>We cannot connect Amica's API because of 'Access-Control-Allow-Origin'.</p>
-                            <p>However, for Google Chrome users there is an extension called <br>
-                                <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en" target="_blank">Allow-Control-Allow-Origin: *</a>
+                            <p>Please download the extension <br>
+                            <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en" target="_blank">Allow-Control-Allow-Origin: *</a> <br>
+                            in order to see the response, if you're a Google Chrome user.                                
                             </p>
                         </div> `)
                     console.log(error);
