@@ -190,7 +190,8 @@ $(function () {
                             <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en" target="_blank">Allow-Control-Allow-Origin: *</a> <br>
                             in order to see the response, if you're a Google Chrome user.                                
                             </p>
-                        </div> `)
+                            <a class="footer__button-amica">Go Back</a>
+                        </div> `);
                     console.log(error);
                 });
         };
@@ -470,7 +471,7 @@ $(function () {
             $amica__top_center.removeClass('amica__top-center').addClass('amica__center-center');
             $amica__top_center__logo.removeClass('amica__top-center__logo').addClass('amica__center-center__logo');
 
-            $('.footer, .row, .amica__top-center__restaurant-info').remove();
+            $('.footer, .row, .amica__top-center__restaurant-info, .error').remove();
 
             buttons.$amicaHome.add($haaga.center).add($amica.center_name).fadeIn(0);
         };
