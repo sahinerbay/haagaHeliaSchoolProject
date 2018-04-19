@@ -61,6 +61,18 @@ body:before {
   height: 100%;
   width: 100%; }
 
+.error {
+  text-align: center;
+  margin-top: 10%;
+  padding: 1rem; }
+  .error h1 {
+    font-size: 1.5rem; }
+  .error p {
+    font-size: 1rem; }
+    .error p a {
+      text-decoration: none;
+      color: #2c7f2f; }
+
 .amica {
   position: fixed;
   top: 0;
@@ -475,6 +487,7 @@ body:before {
     width: 100%; }
     .row__xs-12 img {
       border: 1px solid #ddd;
+      max-width: 100%;
       border-radius: 4px;
       padding: 5px;
       background-color: #fff; }
@@ -645,6 +658,7 @@ body:before {
   background-color: black;
   /* Fallback color */ }
   .modal__container {
+    width: 90%;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -655,9 +669,10 @@ body:before {
       content: "CLOSE";
       position: fixed;
       top: -24px;
-      left: 0;
+      left: 50%;
+      margin-left: -50px;
       right: 0;
-      width: 100%;
+      width: 100px;
       height: 20px;
       color: #fff;
       background-color: #01639e;

@@ -1,27 +1,33 @@
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgb(0,0,0); /* Fallback color */
-
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
     &__container {
+        width: 90%;
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
         pointer-events: none;
-
         &::after {
             content: "CLOSE";
             position: fixed;
             top: -24px;
-            left: 0;
+            left: 50%;
+            margin-left: -50px;
             right: 0;
-            width: 100%;
+            width: 100px;
             height: 20px;
             color: #fff;
             background-color: #01639e;
@@ -32,5 +38,4 @@
             pointer-events: all;
         }
     }
-    
 }

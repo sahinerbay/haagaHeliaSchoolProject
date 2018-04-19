@@ -152,10 +152,11 @@ $(function () {
         var url_restaurant = 'http://www.amica.fi/modules/json/json/Index?costNumber=0084&language=en';
         var url_lunch = 'http://www.amica.fi/api/restaurant/menu/week?language=en&restaurantPageId=6143&weekDate=' + today;
 
-        var getAmicaBasic = function getAmicaBasic() {
+        var getRestaurantInfo = function getRestaurantInfo() {
             return axios.get(url_restaurant).then(function (response) {
                 return response.data;
             }).catch(function (error) {
+                $('.amica').append('<div class="error">\n                            <h1>Service Unavailable!</h1>\n                            <p>We cannot connect Amica\'s API because of \'Access-Control-Allow-Origin\'.</p>\n                            <p>However, for Google Chrome users there is an extension called <br>\n                                <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en" target="_blank">Allow-Control-Allow-Origin: *</a>\n                            </p>\n                        </div> ');
                 console.log(error);
             });
         };
@@ -164,7 +165,7 @@ $(function () {
             return $('<div class="amica__top-center__restaurant-info">\n                        <h1 class="amica__top-center__restaurant-info__name"><a href="' + restaurant.RestaurantUrl + '" target="_blank">' + restaurant.RestaurantName + '</a></h1>\n                        <p class="amica__top-center__restaurant-info__time">Closed!</p>\n                    </div>');
         };
 
-        var getAmicaLunch = function getAmicaLunch() {
+        var getLunchInfo = function getLunchInfo() {
             return axios.get(url_lunch).then(function (response) {
                 return response.data;
             }).catch(function (error) {
@@ -233,9 +234,9 @@ $(function () {
         };
 
         return {
-            getRestaurantInfo: getAmicaBasic,
+            getRestaurantInfo: getRestaurantInfo,
             addRestaurantInfo: addRestaurantInfo,
-            getLunchInfo: getAmicaLunch,
+            getLunchInfo: getLunchInfo,
             addLunchInfo: addLunchInfo,
             styleInactiveDays: styleInactiveDays,
             addOpenClose: addOpenClose
@@ -340,7 +341,7 @@ $(function () {
 
     //Callback functions for buttons
     var buttonsCB = function () {
-        var amicaHomeButtonClicked = function amicaHomeButtonClicked(event) {
+        var amicaHomeButton = function amicaHomeButton(event) {
             event.preventDefault();
 
             setClassesFromHome('amica', $amica.container, 'haaga', $haaga.container);
@@ -402,7 +403,7 @@ $(function () {
             });
         };
 
-        var amicaReturnButtonClicked = function amicaReturnButtonClicked(event) {
+        var amicaReturnButton = function amicaReturnButton(event) {
             event.preventDefault();
 
             setClassesToHome('amica', $amica.container, 'haaga', $haaga.container);
@@ -418,7 +419,7 @@ $(function () {
             buttons.$amicaHome.add($haaga.center).add($amica.center_name).fadeIn(0);
         };
 
-        var haagaHomeButtonClicked = function haagaHomeButtonClicked(event) {
+        var haagaHomeButton = function haagaHomeButton(event) {
             event.preventDefault();
 
             setClassesFromHome('haaga', $haaga.container, 'amica', $amica.container);
@@ -451,7 +452,7 @@ $(function () {
             });
         };
 
-        var haagaReturnButtonClicked = function haagaReturnButtonClicked(event) {
+        var haagaReturnButton = function haagaReturnButton(event) {
             event.preventDefault();
 
             setClassesToHome('haaga', $haaga.container, 'amica', $amica.container);
@@ -470,10 +471,10 @@ $(function () {
         };
 
         return {
-            amicaHomeButton: amicaHomeButtonClicked,
-            haagaHomeButton: haagaHomeButtonClicked,
-            amicaReturnButton: amicaReturnButtonClicked,
-            haagaReturnButton: haagaReturnButtonClicked
+            amicaHomeButton: amicaHomeButton,
+            haagaHomeButton: haagaHomeButton,
+            amicaReturnButton: amicaReturnButton,
+            haagaReturnButton: haagaReturnButton
         };
     }();
 
